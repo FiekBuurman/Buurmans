@@ -1,6 +1,6 @@
 ﻿using MQTTnet.Client;
 
-namespace Buurmans.Mqtt
+namespace Buurmans.Mqtt.Models
 {
     internal class MqttEngineResultModel
     {

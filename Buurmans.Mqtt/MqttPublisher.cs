@@ -1,6 +1,8 @@
 ﻿using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Buurmans.Mqtt.Models;
+using Buurmans.Mqtt.Providers;
 using MQTTnet;
 using MQTTnet.Client;
 

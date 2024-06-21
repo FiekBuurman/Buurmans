@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Buurmans.Mqtt.Models;
 
 namespace Buurmans.Mqtt
 {

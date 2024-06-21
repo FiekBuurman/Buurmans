@@ -1,7 +1,8 @@
 ﻿using System;
+using Buurmans.Mqtt.Models;
 using MQTTnet.Client;
 
-namespace Buurmans.Mqtt
+namespace Buurmans.Mqtt.Extensions
 {
 	internal static class MqttSettingsModelExtensions
 	{

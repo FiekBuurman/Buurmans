@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
+using Buurmans.Mqtt.Interfaces;
+using Buurmans.Mqtt.Models;
 using Newtonsoft.Json;
 
-namespace Buurmans.Mqtt
+namespace Buurmans.Mqtt.Providers
 {
 	internal class MqttConfigurationProvider : IMqttConfigurationProvider
     {

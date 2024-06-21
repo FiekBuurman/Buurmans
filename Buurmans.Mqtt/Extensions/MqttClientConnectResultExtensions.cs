@@ -1,8 +1,9 @@
 ﻿using System.Text;
+using Buurmans.Mqtt.Models;
 using MQTTnet.Client;
 using Newtonsoft.Json;
 
-namespace Buurmans.Mqtt
+namespace Buurmans.Mqtt.Extensions
 {
 	internal static class MqttClientConnectResultExtensions
 	{

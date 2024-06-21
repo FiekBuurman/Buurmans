@@ -2,6 +2,9 @@
 using System.Threading.Tasks;
 using Buurmans.Common.Extensions;
 using Buurmans.Common.Interfaces;
+using Buurmans.Mqtt.Extensions;
+using Buurmans.Mqtt.Interfaces;
+using Buurmans.Mqtt.Models;
 using MQTTnet;
 using MQTTnet.Client;
 

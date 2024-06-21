@@ -1,4 +1,4 @@
-﻿namespace Buurmans.Mqtt
+﻿namespace Buurmans.Mqtt.Models
 {
     internal class MqttConfigurationSettingsModel
     {

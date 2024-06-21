@@ -52,15 +52,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMqttConfigurationProvider.cs" />
+    <Compile Include="Interfaces\IMqttConfigurationProvider.cs" />
     <Compile Include="IMqttEngine.cs" />
-    <Compile Include="MqttClientConnectResultExtensions.cs" />
-    <Compile Include="MqttConfigurationProvider.cs" />
-    <Compile Include="MqttConfigurationSettingsModel.cs" />
+    <Compile Include="Extensions\MqttClientConnectResultExtensions.cs" />
+    <Compile Include="Providers\MqttConfigurationProvider.cs" />
+    <Compile Include="Models\MqttConfigurationSettingsModel.cs" />
     <Compile Include="MqttEngine.cs" />
-    <Compile Include="MqttEngineResultModel.cs" />
+    <Compile Include="Models\MqttEngineResultModel.cs" />
     <Compile Include="MqttPublisher.cs" />
-    <Compile Include="MqttSettingsModelExtensions.cs" />
+    <Compile Include="Extensions\MqttSettingsModelExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,5 +73,6 @@
       <Name>Buurmans.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
