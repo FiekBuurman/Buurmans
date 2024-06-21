@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Autofac;
 
-namespace Buurmans.Console
+namespace Buurmans.Console;
+
+internal abstract class Program
 {
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-        }
-    }
+	private static void Main()
+	{
+		var container = ApplicationSetup.CreateContainer();
+		using var scope = container.BeginLifetimeScope();
+		var application = scope.Resolve<IApplication>();
+		application.Run();
+	}
 }
