@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="AutofacModule.cs" />
     <Compile Include="Extensions\ExceptionExtension.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Interfaces\IObserverManager.cs" />
     <Compile Include="Managers\ObserverManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
