@@ -7,7 +7,12 @@ internal static class ApplicationSetup
 	public static IContainer CreateContainer()
 	{
 		var builder = new ContainerBuilder();
-		builder.RegisterType<Application>().AsImplementedInterfaces().SingleInstance();
+
+		builder.RegisterModule<Buurmans.Common.AutofacModule>();
+		builder.RegisterModule<Buurmans.Mqtt.AutofacModule>();
+		
+		builder.RegisterType<Buurmans.Console.Application>().AsImplementedInterfaces().SingleInstance();
+
 		return builder.Build();
 	}
 }
