@@ -5,7 +5,7 @@ using Buurmans.Common.Interfaces;
 
 namespace Buurmans.Common.Managers;
 
-public class ObserverManager : IObserverManager
+internal class ObserverManager : IObserverManager
 {
 	private readonly List<object> _observers = [];
 
