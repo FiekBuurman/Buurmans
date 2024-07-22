@@ -13,9 +13,9 @@ public class Application(IObserverManager observerManager, IMqttEngine mqttEngin
 
 		TestMqtt();
 
-		observerManager.NotifyChange(new Exception("Big Bad Test Exception!"));
+		//observerManager.NotifyChange(new Exception("Big Bad Test Exception!"));
+
 		observerManager.NotifyChange("Press any key to exit.");
-		
 		System.Console.ReadKey();
 
         UnRegisterObservers();

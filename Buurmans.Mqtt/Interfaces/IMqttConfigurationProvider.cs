@@ -1,9 +1,10 @@
-﻿using Buurmans.Mqtt.Models;
+﻿using Buurmans.Common.Interfaces;
+using Buurmans.Mqtt.Models;
 
 namespace Buurmans.Mqtt.Interfaces
 {
-	internal interface IMqttConfigurationProvider
+	internal interface IMqttConfigurationProvider : IBaseConfigurationProvider<MqttConfigurationSettingsModel>
 	{
-		MqttConfigurationSettingsModel GetSettings();
+		new MqttConfigurationSettingsModel GetSettings();
 	}
 }
