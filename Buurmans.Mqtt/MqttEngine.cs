@@ -77,17 +77,45 @@ namespace Buurmans.Mqtt
 			}
 		}
 
-        public Task Publish(string topic, string payload)
-		{
-			throw new System.NotImplementedException();
-		}
-		
-		public void TestSettings(MqttConfigurationSettingsModel mqttSettingsModel)
+        public async Task Publish(string topic, string payload)
+        {
+            if (!_mqttClient.IsConnected)
+				await Connect();
+
+            if (!_mqttClient.IsConnected)
+                throw new InvalidOperationException("MQTT client is not connected.");
+
+            var message = new MqttApplicationMessageBuilder()
+                .WithTopic(topic)
+                .WithPayload(payload)
+                .Build();
+
+            try
+            {
+                var result = await _mqttClient.PublishAsync(message);
+                var resultMessage = result.ReasonCode == MqttClientPublishReasonCode.Success
+					? $"Successfully published message to topic '{topic}' with payload '{payload}'."
+					: $"Failed to publish message to topic '{topic}' with payload '{payload}'. Reason: {result.ReasonCode}";
+
+                _observerManager.NotifyChange(resultMessage);
+            }
+            catch (Exception exception)
+            {
+                _observerManager.NotifyChange(new MqttEngineResultModel(MqttClientConnectResultCode.UnspecifiedError)
+                {
+                    ReasonString = exception.Message,
+                    ResponseInformation = exception.FlattenException()
+                }.FormatResult());
+            }
+        }
+
+        public void TestSettings()
 		{
 			var factory = new MqttFactory();
 			var client = factory.CreateMqttClient();
+            var mqttSettingsModel = _mqttConfigurationProvider.GetSettings();
 
-			try
+            try
 			{
 				var mqttOptions = mqttSettingsModel.CreateMqttClientOptions();
 				var result = client.ConnectAsync(mqttOptions).Result;
