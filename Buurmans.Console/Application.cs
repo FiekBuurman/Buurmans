@@ -11,21 +11,28 @@ public class Application(IObserverManager observerManager, IMqttEngine mqttEngin
 	{
 		RegisterObservers();
 
-		observerManager.NotifyChange(new Exception("Big Bad Test Exception!"));
+		TestMqtt();
+
+		//observerManager.NotifyChange(new Exception("Big Bad Test Exception!"));
+
 		observerManager.NotifyChange("Press any key to exit.");
-
-		SendMqttMessage();
-
 		System.Console.ReadKey();
 
         UnRegisterObservers();
 	}
 
-	private void SendMqttMessage() 
+	private void TestMqtt()
 	{
-		mqttEngine.Publish("develop", "test1");
+		try
+		{
+			mqttEngine.Connect().Wait();
+        }
+		catch (Exception exception)
+		{
+			observerManager.NotifyChange(exception);
+		}	
 	}
-	
+
 	private void RegisterObservers()
 	{
 		observerManager.Register<string>(WriteToConsole);

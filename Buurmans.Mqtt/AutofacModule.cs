@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Buurmans.Mqtt.Interfaces;
 using Buurmans.Mqtt.Providers;
 
 namespace Buurmans.Mqtt;
@@ -10,7 +9,8 @@ public class AutofacModule : Module
 	{
 		builder.RegisterModule<Buurmans.Common.AutofacModule>();
 
-		builder.RegisterType<MqttConfigurationProvider>().As<IMqttConfigurationProvider>();
-        builder.RegisterType<MqttEngine>().As<IMqttEngine>();
-    }
+		builder.RegisterType<MqttEngine>().AsImplementedInterfaces().SingleInstance();
+		builder.RegisterType<MqttConfigurationProvider>().AsImplementedInterfaces().SingleInstance();
+
+	}
 }
