@@ -1,6 +1,6 @@
 ﻿namespace Buurmans.Mqtt.Models
 {
-    internal class MqttConfigurationSettingsModel
+	public class MqttConfigurationSettingsModel
     {
 		public string BrokerUrl { get; set; }
 		public int Port { get; set; }

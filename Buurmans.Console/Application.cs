@@ -1,14 +1,17 @@
 ﻿using System;
 using Buurmans.Common.Extensions;
 using Buurmans.Common.Interfaces;
+using Buurmans.Mqtt;
 
 namespace Buurmans.Console;
 
-public class Application(IObserverManager observerManager) : IApplication
+public class Application(IObserverManager observerManager, IMqttEngine mqttEngine) : IApplication
 {
 	public void Run()
 	{
 		RegisterObservers();
+
+		TestMqtt();
 
 		observerManager.NotifyChange(new Exception("Big Bad Test Exception!"));
 		observerManager.NotifyChange("Press any key to exit.");
@@ -17,7 +20,19 @@ public class Application(IObserverManager observerManager) : IApplication
 
         UnRegisterObservers();
 	}
-	
+
+	private void TestMqtt()
+	{
+		try
+		{
+			mqttEngine.Connect().Wait();
+        }
+		catch (Exception exception)
+		{
+			observerManager.NotifyChange(exception);
+		}	
+	}
+
 	private void RegisterObservers()
 	{
 		observerManager.Register<string>(WriteToConsole);

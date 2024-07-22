@@ -79,7 +79,7 @@
       <Version>4.3.6.1152</Version>
     </PackageReference>
     <PackageReference Include="MQTTnet.Extensions.ManagedClient">
-      <Version>4.3.5.1141</Version>
+      <Version>4.3.6.1152</Version>
     </PackageReference>
     <PackageReference Include="System.Diagnostics.DiagnosticSource">
       <Version>8.0.1</Version>

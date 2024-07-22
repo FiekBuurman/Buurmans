@@ -3,7 +3,7 @@ using Buurmans.Mqtt.Models;
 
 namespace Buurmans.Mqtt
 {
-    internal interface IMqttEngine
+    public interface IMqttEngine
     {
 		Task Connect();
 		Task Disconnect();
