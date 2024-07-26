@@ -1,6 +1,6 @@
 ﻿namespace Buurmans.Scrape.Core.Models;
 
-public class ScrapeRequestModel
+internal class ScrapeRequestModel
 {
 	public string Name { get; set; }
 	public string Uri { get; set; }

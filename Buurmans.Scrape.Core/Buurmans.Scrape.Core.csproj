@@ -84,6 +84,7 @@
     <Compile Include="Converters\JsonScrapeConverter.cs" />
     <Compile Include="Factories\ScrapeResultModelFactory.cs" />
     <Compile Include="HtmlScrapeEngine.cs" />
+    <Compile Include="IHtmlScrapeEngine.cs" />
     <Compile Include="Interfaces\IScrapeConfigurationProvider.cs" />
     <Compile Include="Interfaces\IHtmlService.cs" />
     <Compile Include="Interfaces\IJsonScrapeConverter.cs" />

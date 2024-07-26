@@ -27,8 +27,3 @@ internal class HtmlScrapeEngine(
 		return jsonOutput;
 	}
 }
-
-public interface IHtmlScrapeEngine
-{
-	Task<string> Process();
-}

@@ -2,7 +2,7 @@
 
 namespace Buurmans.Scrape.Core.Interfaces;
 
-public interface IHtmlService
+internal interface IHtmlService
 {
 	Task<string> DownloadHtmlAsync(string url);
 }

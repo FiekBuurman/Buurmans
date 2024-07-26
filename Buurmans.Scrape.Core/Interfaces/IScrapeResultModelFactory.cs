@@ -2,7 +2,7 @@
 
 namespace Buurmans.Scrape.Core.Interfaces;
 
-public interface IScrapeResultModelFactory
+internal interface IScrapeResultModelFactory
 {
 	ScrapeResultModel Create(ScrapeRequestModel requestModel, string html);
 }
