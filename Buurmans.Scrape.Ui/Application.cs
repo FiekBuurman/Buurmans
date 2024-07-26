@@ -3,7 +3,7 @@ using Buurmans.Scrape.Core;
 
 namespace Buurmans.Scrape.Ui;
 
-public class Application(IHtmlScrapeEngine htmlScrapeEngine) : IApplication
+public class Application(IScrapeEngine htmlScrapeEngine) : IApplication
 {
 	public void Run()
 	{

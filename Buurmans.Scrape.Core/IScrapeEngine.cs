@@ -2,7 +2,7 @@
 
 namespace Buurmans.Scrape.Core
 {
-	public interface IHtmlScrapeEngine
+	public interface IScrapeEngine
 	{
 		Task<string> Process();
 	}

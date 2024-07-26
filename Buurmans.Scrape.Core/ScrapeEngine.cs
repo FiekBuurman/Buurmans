@@ -6,11 +6,11 @@ using Buurmans.Scrape.Core.Models;
 
 namespace Buurmans.Scrape.Core;
 
-internal class HtmlScrapeEngine(
+internal class ScrapeEngine(
 	IScrapeConfigurationProvider configurationProvider, 
 	IScrapeResultModelFactory resultModelFactory,
 	IJsonConverter jsonConverter,
-	IHtmlService htmlService) : IHtmlScrapeEngine
+	IHtmlService htmlService) : IScrapeEngine
 {
 
 	public async Task<string> Process()

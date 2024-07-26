@@ -13,6 +13,6 @@ public class AutofacModule : Module
         builder.RegisterType<ScrapeResultModelFactory>().AsImplementedInterfaces().SingleInstance();
 		builder.RegisterType<ScrapeConfigurationProvider>().AsImplementedInterfaces().SingleInstance();
 		builder.RegisterType<HtmlService>().AsImplementedInterfaces().SingleInstance();
-		builder.RegisterType<HtmlScrapeEngine>().AsImplementedInterfaces().SingleInstance();
+		builder.RegisterType<ScrapeEngine>().AsImplementedInterfaces().SingleInstance();
 	}
 }
