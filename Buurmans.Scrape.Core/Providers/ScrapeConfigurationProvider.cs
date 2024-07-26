@@ -1,22 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using Buurmans.Common.Providers;
 using Buurmans.Scrape.Core.Interfaces;
 using Buurmans.Scrape.Core.Models;
 
 namespace Buurmans.Scrape.Core.Providers;
 
-internal class ConfigurationProvider : IConfigurationProvider
+internal class ScrapeConfigurationProvider : BaseConfigurationProvider<ScrapeConfigurationSettingsModel>, IScrapeConfigurationProvider
 {
-	public ConfigurationModel GetConfigurationModel()
+	public new ScrapeConfigurationSettingsModel GetSettings()
 	{
-		return new ConfigurationModel
-		{
-			Interval = TimeSpan.FromHours(6),
-			Requests = CreateScrapeRequestModels()
-		};
+		var settings = base.GetSettings();
+		return settings ?? CreateDefaultSettings();
 	}
 
-	private static List<ScrapeRequestModel> CreateScrapeRequestModels()
+	private ScrapeConfigurationSettingsModel CreateDefaultSettings()
+	{
+		var settings = new ScrapeConfigurationSettingsModel
+		{
+			Interval = TimeSpan.FromHours(6),
+			Requests = CreateDefailtScrapeRequestModels()
+		};
+
+		SaveSettings(settings);
+		return settings;
+	}
+
+	private static List<ScrapeRequestModel> CreateDefailtScrapeRequestModels()
 	{
 		return
 		[

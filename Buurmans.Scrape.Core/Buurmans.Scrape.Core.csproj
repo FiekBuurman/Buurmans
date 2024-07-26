@@ -84,20 +84,26 @@
     <Compile Include="Converters\JsonScrapeConverter.cs" />
     <Compile Include="Factories\ScrapeResultModelFactory.cs" />
     <Compile Include="HtmlScrapeEngine.cs" />
-    <Compile Include="Interfaces\IConfigurationProvider.cs" />
+    <Compile Include="Interfaces\IScrapeConfigurationProvider.cs" />
     <Compile Include="Interfaces\IHtmlService.cs" />
     <Compile Include="Interfaces\IJsonScrapeConverter.cs" />
     <Compile Include="Interfaces\IScrapeResultModelFactory.cs" />
-    <Compile Include="Models\ConfigurationModel.cs" />
+    <Compile Include="Models\ScrapeConfigurationSettingsModel.cs" />
     <Compile Include="Models\ScrapeRequestModel.cs" />
     <Compile Include="Models\ScrapeResultModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\ConfigurationProvider.cs" />
+    <Compile Include="Providers\ScrapeConfigurationProvider.cs" />
     <Compile Include="Services\HtmlService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Buurmans.Common\Buurmans.Common.csproj">
+      <Project>{4f7d22ae-5efa-4de1-a7a3-7a1d48a5ded5}</Project>
+      <Name>Buurmans.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

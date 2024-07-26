@@ -12,7 +12,7 @@ public class AutofacModule : Module
 	{
 		builder.RegisterType<JsonScrapeConverter>().AsImplementedInterfaces().SingleInstance();
 		builder.RegisterType<ScrapeResultModelFactory>().AsImplementedInterfaces().SingleInstance();
-		builder.RegisterType<ConfigurationProvider>().AsImplementedInterfaces().SingleInstance();
+		builder.RegisterType<ScrapeConfigurationProvider>().AsImplementedInterfaces().SingleInstance();
 		builder.RegisterType<HtmlService>().AsImplementedInterfaces().SingleInstance();
 		builder.RegisterType<HtmlScrapeEngine>().AsImplementedInterfaces().SingleInstance();
 	}

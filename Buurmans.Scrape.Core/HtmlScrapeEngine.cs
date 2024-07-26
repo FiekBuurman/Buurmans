@@ -6,7 +6,7 @@ using Buurmans.Scrape.Core.Models;
 namespace Buurmans.Scrape.Core;
 
 internal class HtmlScrapeEngine(
-	IConfigurationProvider configurationProvider, 
+	IScrapeConfigurationProvider configurationProvider, 
 	IScrapeResultModelFactory resultModelFactory,
 	IJsonScrapeConverter jsonScrapeConverter,
 	IHtmlService htmlService) : IHtmlScrapeEngine
@@ -14,7 +14,7 @@ internal class HtmlScrapeEngine(
 
 	public async Task<string> Process()
 	{
-		var requestModels = configurationProvider.GetConfigurationModel().Requests;
+		var requestModels = configurationProvider.GetSettings().Requests;
 		var resultModels = new List<ScrapeResultModel>();
 			
 		foreach (var requestModel in requestModels)
