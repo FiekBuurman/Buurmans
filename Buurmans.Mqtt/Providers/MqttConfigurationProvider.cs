@@ -1,12 +1,13 @@
-﻿using Buurmans.Common.Providers;
+﻿using Buurmans.Common.Converters;
+using Buurmans.Common.Providers;
 using Buurmans.Mqtt.Interfaces;
 using Buurmans.Mqtt.Models;
 
 namespace Buurmans.Mqtt.Providers
 {
-	internal class MqttConfigurationProvider : BaseConfigurationProvider<MqttConfigurationSettingsModel>, IMqttConfigurationProvider
-    {
-
+	internal class MqttConfigurationProvider(IJsonConverter jsonConverter) 
+		: BaseConfigurationProvider<MqttConfigurationSettingsModel>(jsonConverter), IMqttConfigurationProvider
+	{
 		public new MqttConfigurationSettingsModel GetSettings()
 		{
 			var settings = base.GetSettings();
@@ -28,5 +29,5 @@ namespace Buurmans.Mqtt.Providers
             SaveSettings(settings);
             return settings;
         }
-    }
+	}
 }
