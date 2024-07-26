@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Buurmans.Common.Converters;
 using Buurmans.Common.Providers;
 using Buurmans.Scrape.Core.Interfaces;
 using Buurmans.Scrape.Core.Models;
 
 namespace Buurmans.Scrape.Core.Providers;
 
-internal class ScrapeConfigurationProvider : BaseConfigurationProvider<ScrapeConfigurationSettingsModel>, IScrapeConfigurationProvider
+internal class ScrapeConfigurationProvider(IJsonConverter jsonConverter) 
+	: BaseConfigurationProvider<ScrapeConfigurationSettingsModel>(jsonConverter), IScrapeConfigurationProvider
 {
 	public new ScrapeConfigurationSettingsModel GetSettings()
 	{

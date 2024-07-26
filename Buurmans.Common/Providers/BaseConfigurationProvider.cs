@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
+using Buurmans.Common.Converters;
 using Buurmans.Common.Interfaces;
-using Newtonsoft.Json;
 
 namespace Buurmans.Common.Providers
 {
-	public class BaseConfigurationProvider<T> : IBaseConfigurationProvider<T> where T : class
-    {
+	public class BaseConfigurationProvider<T>(IJsonConverter jsonConverter) : IBaseConfigurationProvider<T> where T : class
+	{
 		private string _filePath;
         private T _settingsModel;
 
@@ -20,14 +20,14 @@ namespace Buurmans.Common.Providers
 				return null;
 
 			var serializedSettingsModel = File.ReadAllText(_filePath);
-			return JsonConvert.DeserializeObject<T>(serializedSettingsModel);
+			return jsonConverter.Deserialize<T>(serializedSettingsModel);
         }
 
 		public void SaveSettings(T settingsModel)
 		{
 			EnsureFilePath();
 
-            var serializedSettingsModel = JsonConvert.SerializeObject(settingsModel, Formatting.Indented);
+            var serializedSettingsModel = jsonConverter.Serialize(settingsModel);
 			File.WriteAllText(_filePath, serializedSettingsModel);
 		}
 
