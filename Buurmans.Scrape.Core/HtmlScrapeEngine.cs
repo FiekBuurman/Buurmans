@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Buurmans.Common.Converters;
 using Buurmans.Scrape.Core.Interfaces;
 using Buurmans.Scrape.Core.Models;
 
@@ -8,7 +9,7 @@ namespace Buurmans.Scrape.Core;
 internal class HtmlScrapeEngine(
 	IScrapeConfigurationProvider configurationProvider, 
 	IScrapeResultModelFactory resultModelFactory,
-	IJsonScrapeConverter jsonScrapeConverter,
+	IJsonConverter jsonConverter,
 	IHtmlService htmlService) : IHtmlScrapeEngine
 {
 
@@ -23,7 +24,7 @@ internal class HtmlScrapeEngine(
 			resultModels.Add(resultModelFactory.Create(requestModel, html));
 		}
 		
-		var jsonOutput = jsonScrapeConverter.ConvertTo(resultModels);
+		var jsonOutput = jsonConverter.Serialize(resultModels);
 		return jsonOutput;
 	}
 }

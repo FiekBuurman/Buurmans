@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Buurmans.Scrape.Core.Converters;
 using Buurmans.Scrape.Core.Factories;
 using Buurmans.Scrape.Core.Providers;
 using Buurmans.Scrape.Core.Services;
@@ -10,8 +9,8 @@ public class AutofacModule : Module
 {
 	protected override void Load(ContainerBuilder builder)
 	{
-		builder.RegisterType<JsonScrapeConverter>().AsImplementedInterfaces().SingleInstance();
-		builder.RegisterType<ScrapeResultModelFactory>().AsImplementedInterfaces().SingleInstance();
+		builder.RegisterModule<Buurmans.Common.AutofacModule>();
+        builder.RegisterType<ScrapeResultModelFactory>().AsImplementedInterfaces().SingleInstance();
 		builder.RegisterType<ScrapeConfigurationProvider>().AsImplementedInterfaces().SingleInstance();
 		builder.RegisterType<HtmlService>().AsImplementedInterfaces().SingleInstance();
 		builder.RegisterType<HtmlScrapeEngine>().AsImplementedInterfaces().SingleInstance();
