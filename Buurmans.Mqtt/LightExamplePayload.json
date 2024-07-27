@@ -1,0 +1,23 @@
+{
+  "brightness": 229,
+  "color": {
+    "h": 204,
+    "hue": 204,
+    "x": 0.444,
+    "y": 0.517
+  },
+  "color_mode": "xy",
+  "color_options": null,
+  "color_temp": 278,
+  "color_temp_startup": 65535,
+  "level_config": { "on_level": "previous" },
+  "linkquality": 142,
+  "power_on_behavior": "previous",
+  "state": "ON",
+  "update": {
+    "installed_version": 268572245,
+    "latest_version": 268572245,
+    "state": "idle"
+  },
+  "update_available": false
+}

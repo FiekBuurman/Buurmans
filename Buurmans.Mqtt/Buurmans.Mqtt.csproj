@@ -41,6 +41,7 @@
     <Compile Include="Interfaces\IMqttConfigurationProvider.cs" />
     <Compile Include="IMqttEngine.cs" />
     <Compile Include="Extensions\MqttClientConnectResultExtensions.cs" />
+    <Compile Include="Models\MqttPayloadModel.cs" />
     <Compile Include="Providers\MqttConfigurationProvider.cs" />
     <Compile Include="Models\MqttConfigurationSettingsModel.cs" />
     <Compile Include="MqttEngine.cs" />
@@ -51,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="LightExamplePayload.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Buurmans\Buurmans.Common\Buurmans.Common.csproj">

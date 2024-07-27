@@ -85,10 +85,18 @@ namespace Buurmans.Mqtt
             if (!_mqttClient.IsConnected)
                 throw new InvalidOperationException("MQTT client is not connected.");
 
+    //        var message = new MqttApplicationMessageBuilder()
+    //            .WithTopic(topic)
+    //            .WithPayload(payload)
+    //            .WithExactlyOnceQoS()
+				//.WithRetainFlag()
+    //            .Build();
+
             var message = new MqttApplicationMessageBuilder()
-                .WithTopic(topic)
-                .WithPayload(payload)
-                .Build();
+				.WithTopic(topic)
+				.WithPayload(payload)
+				.WithRetainFlag()
+				.Build();
 
             try
             {
