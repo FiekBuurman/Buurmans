@@ -26,7 +26,8 @@ namespace Buurmans.Common.Converters
 		{
 			try
 			{
-				return JsonConvert.SerializeObject(modelToConvert, Formatting.Indented);
+				var settings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+                return JsonConvert.SerializeObject(modelToConvert, Formatting.Indented, settings);
 			}
 			catch (JsonException exception)
 			{
