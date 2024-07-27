@@ -10,7 +10,7 @@ using Buurmans.Mqtt.Models;
 
 namespace Buurmans.Console;
 
-public class Application(IObserverManager observerManager, IMqttEngine mqttEngine, IJsonConverter jsonConverter) : IApplication
+public class Application(IObserverManager observerManager, IMqttEngine mqttEngine) : IApplication
 {
     public void Run()
     {
