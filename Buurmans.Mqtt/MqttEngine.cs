@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Buurmans.Common.Converters;
 using Buurmans.Common.Extensions;
 using Buurmans.Common.Interfaces;
 using Buurmans.Mqtt.Extensions;
@@ -10,25 +11,25 @@ using MQTTnet.Client;
 
 namespace Buurmans.Mqtt
 {
-	internal class MqttEngine : IMqttEngine
+	internal class MqttEngine(
+		IObserverManager observerManager, 
+		IMqttConfigurationProvider mqttConfigurationProvider, 
+		IJsonConverter jsonConverter) : IMqttEngine
 	{
-		private readonly IObserverManager _observerManager;
-		private readonly IMqttConfigurationProvider _mqttConfigurationProvider;
-		private readonly IMqttClient _mqttClient;
-		public MqttEngine(IObserverManager observerManager, IMqttConfigurationProvider mqttConfigurationProvider)
+		private readonly IMqttClient _mqttClient = new MqttFactory().CreateMqttClient();
+
+		public Task Publish(MqttMessageModel mqttMessageModel)
 		{
-			_observerManager = observerManager;
-			_mqttConfigurationProvider = mqttConfigurationProvider;
-			var factory = new MqttFactory();
-			_mqttClient = factory.CreateMqttClient();
+			var payload = jsonConverter.Serialize(mqttMessageModel.MqttPayloadModel);
+			return Publish(mqttMessageModel.Topic, payload);
 		}
 
-		public async Task Connect()
+        private async Task Connect()
 		{
-			var mqttSettingsModel = _mqttConfigurationProvider.GetSettings();
+			var mqttSettingsModel = mqttConfigurationProvider.GetSettings();
 			var result = await ConnectAsync(mqttSettingsModel.CreateMqttClientOptions());
 
-			_observerManager.NotifyChange(result.FormatResult());
+			observerManager.NotifyChange(result.FormatResult());
 		}
 
 		private async Task<MqttEngineResultModel> ConnectAsync(MqttClientOptions options)
@@ -51,10 +52,10 @@ namespace Buurmans.Mqtt
 			}
 		}
 
-		public async Task Disconnect()
+		private async Task Disconnect()
 		{
 			var result = await DisconnectAsync();
-			_observerManager.NotifyChange(result.FormatResult());
+			observerManager.NotifyChange(result.FormatResult());
         }
 
 		private async Task<MqttEngineResultModel> DisconnectAsync()
@@ -77,7 +78,7 @@ namespace Buurmans.Mqtt
 			}
 		}
 
-        public async Task Publish(string topic, string payload)
+		private async Task Publish(string topic, string payload)
         {
             if (!_mqttClient.IsConnected)
 				await Connect();
@@ -86,46 +87,52 @@ namespace Buurmans.Mqtt
                 throw new InvalidOperationException("MQTT client is not connected.");
 
             var message = new MqttApplicationMessageBuilder()
-                .WithTopic(topic)
-                .WithPayload(payload)
-                .Build();
+				.WithTopic(topic)
+				.WithPayload(payload)
+				.WithRetainFlag()
+				.Build();
 
             try
             {
                 var result = await _mqttClient.PublishAsync(message);
                 var resultMessage = result.ReasonCode == MqttClientPublishReasonCode.Success
-					? $"Successfully published message to topic '{topic}' with payload '{payload}'."
-					: $"Failed to publish message to topic '{topic}' with payload '{payload}'. Reason: {result.ReasonCode}";
+					? $"Successfully published message to topic '{topic}' with payload: \r\n{payload}"
+					: $"Failed to publish message to topic '{topic}' with payload: \r\n{payload}\r\nReason: \r\n{result.ReasonCode}";
 
-                _observerManager.NotifyChange(resultMessage);
+                observerManager.NotifyChange(resultMessage);
             }
             catch (Exception exception)
             {
-                _observerManager.NotifyChange(new MqttEngineResultModel(MqttClientConnectResultCode.UnspecifiedError)
-                {
-                    ReasonString = exception.Message,
-                    ResponseInformation = exception.FlattenException()
-                }.FormatResult());
+				observerManager.NotifyChange(CreateErrorResult(exception).FormatResult());
             }
         }
 
-        public void TestSettings()
+		private static MqttEngineResultModel CreateErrorResult(Exception exception)
+		{
+			return new MqttEngineResultModel(MqttClientConnectResultCode.UnspecifiedError)
+			{
+				ReasonString = exception.Message,
+				ResponseInformation = exception.FlattenException()
+			};
+		}
+		
+		private void TestSettings()
 		{
 			var factory = new MqttFactory();
 			var client = factory.CreateMqttClient();
-            var mqttSettingsModel = _mqttConfigurationProvider.GetSettings();
+            var mqttSettingsModel = mqttConfigurationProvider.GetSettings();
 
             try
 			{
 				var mqttOptions = mqttSettingsModel.CreateMqttClientOptions();
 				var result = client.ConnectAsync(mqttOptions).Result;
 
-				_observerManager.NotifyChange(result.ResultCode == MqttClientConnectResultCode.Success
+				observerManager.NotifyChange(result.ResultCode == MqttClientConnectResultCode.Success
 					? "Connection succeeded!"
 					: "Connection Failed!");
 
 				var resultModel = new MqttEngineResultModel(result);
-				_observerManager.NotifyChange(resultModel.FormatResult());
+				observerManager.NotifyChange(resultModel.FormatResult());
 			}
 			catch (Exception exception)
 			{
@@ -134,7 +141,7 @@ namespace Buurmans.Mqtt
 					ReasonString = exception.Message,
 					ResponseInformation = exception.FlattenException()
 				};
-				_observerManager.NotifyChange(resultModel.FormatResult());
+				observerManager.NotifyChange(resultModel.FormatResult());
 			}
 			finally
 			{
