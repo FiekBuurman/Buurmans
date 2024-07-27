@@ -8,6 +8,7 @@ namespace Buurmans.Mqtt
 		Task Connect();
 		Task Disconnect();
 		Task Publish(string topic, string payload);
+		Task Publish(MqttMessageModel mqttMessageModel);
 		void TestSettings();
     }
 }

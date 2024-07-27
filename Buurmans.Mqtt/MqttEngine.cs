@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Buurmans.Common.Converters;
 using Buurmans.Common.Extensions;
 using Buurmans.Common.Interfaces;
 using Buurmans.Mqtt.Extensions;
@@ -14,11 +15,13 @@ namespace Buurmans.Mqtt
 	{
 		private readonly IObserverManager _observerManager;
 		private readonly IMqttConfigurationProvider _mqttConfigurationProvider;
+		private readonly IJsonConverter _jsonConverter;
 		private readonly IMqttClient _mqttClient;
-		public MqttEngine(IObserverManager observerManager, IMqttConfigurationProvider mqttConfigurationProvider)
+		public MqttEngine(IObserverManager observerManager, IMqttConfigurationProvider mqttConfigurationProvider, IJsonConverter jsonConverter)
 		{
 			_observerManager = observerManager;
 			_mqttConfigurationProvider = mqttConfigurationProvider;
+			_jsonConverter = jsonConverter;
 			var factory = new MqttFactory();
 			_mqttClient = factory.CreateMqttClient();
 		}
@@ -110,7 +113,13 @@ namespace Buurmans.Mqtt
             }
         }
 
-        public void TestSettings()
+		public Task Publish(MqttMessageModel mqttMessageModel)
+		{
+			var payload = _jsonConverter.Serialize(mqttMessageModel.MqttPayloadModel);
+			return Publish(mqttMessageModel.Topic, payload);
+		}
+
+		public void TestSettings()
 		{
 			var factory = new MqttFactory();
 			var client = factory.CreateMqttClient();

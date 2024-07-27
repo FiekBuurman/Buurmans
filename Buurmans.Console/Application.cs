@@ -18,8 +18,6 @@ public class Application(IObserverManager observerManager, IMqttEngine mqttEngin
 
         TestMqtt();
 
-        //observerManager.NotifyChange(new Exception("Big Bad Test Exception!"));
-
         observerManager.NotifyChange("Press any key to exit.");
         System.Console.ReadKey();
 
@@ -51,16 +49,16 @@ public class Application(IObserverManager observerManager, IMqttEngine mqttEngin
                     ColorModel = colorSequence[colorIndex]
                 };
 
-                var payload = jsonConverter.Serialize(mqttMessageModel.MqttPayloadModel);
-                mqttEngine.Publish(mqttMessageModel.Topic, payload);
+                mqttEngine.Publish(mqttMessageModel);
                 
                 colorIndex = (colorIndex + 1) % colorSequence.Count;
 
                 Thread.Sleep(3000);
             }
-
-            var offPayLoad = new LightMqttPayloadModel { State = "OFF" };
-            mqttEngine.Publish(mqttMessageModel.Topic, jsonConverter.Serialize(offPayLoad));
+            
+			var offPayLoad = new LightMqttPayloadModel { State = "OFF" };
+            mqttMessageModel.MqttPayloadModel = offPayLoad;
+            mqttEngine.Publish(mqttMessageModel);
 
         }
         catch (Exception exception)
