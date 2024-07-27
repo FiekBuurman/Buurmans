@@ -7,8 +7,6 @@ using Buurmans.Common.Extensions;
 using Buurmans.Common.Interfaces;
 using Buurmans.Mqtt;
 using Buurmans.Mqtt.Models;
-using Newtonsoft.Json;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Buurmans.Console;
 
@@ -31,53 +29,32 @@ public class Application(IObserverManager observerManager, IMqttEngine mqttEngin
     private void TestMqtt()
     {
         try
-        {
-            List<LightColor> colorSequence =
-            [
-                new LightColor { Red = 255, Green = 0, Blue = 0 },
-                new LightColor { Red = 255, Green = 128, Blue = 0 },
-                new LightColor { Red = 255, Green = 255, Blue = 0 },
-                new LightColor { Red = 128, Green = 255, Blue = 0 },
-                new LightColor { Red = 0, Green = 255, Blue = 0 },
-                new LightColor { Red = 0, Green = 255, Blue = 128 },
-                new LightColor { Red = 0, Green = 255, Blue = 255 },
-                new LightColor { Red = 0, Green = 128, Blue = 255 },
-                new LightColor { Red = 0, Green = 0, Blue = 255 },
-                new LightColor { Red = 128, Green = 0, Blue = 255 },
-                new LightColor { Red = 255, Green = 0, Blue = 255 },
-                new LightColor { Red = 255, Green = 0, Blue = 128 }
-            ];
-
-            MqttMessage mqttMessage = new();
-            mqttMessage.Topic = "zigbee2mqtt/woonkamer lamp test/set";
-            int colorIndex = 0;
-
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
-            
-            mqttEngine.Publish("zigbee2mqtt/woonkamer lamp test/set", "{\"state\":\"OFF\"}");
+		{
+			var colorSequence = CreateMqttLightColorModels();
+            var colorIndex = 0;
+			var stopwatch = new Stopwatch();
+			stopwatch.Start();
+			var mqttMessageModel = new MqttMessageModel("zigbee2mqtt/woonkamer lamp test/set")
+			{
+				MqttPayloadModel = new LightMqttPayloadModel
+				{
+					State = "ON",
+					ColorModel = colorSequence[colorIndex]
+				}
+			};
 
             while (stopwatch.Elapsed < TimeSpan.FromMinutes(1))
             {
-                var lightPayload = new LightPayload
-                {
-                    State = "ON",
-                    Color = colorSequence[colorIndex]
-                };
-
-                var payload = jsonConverter.Serialize(lightPayload);
-
-                mqttEngine.Publish(mqttMessage.Topic, payload);
-
-
+				var payload = jsonConverter.Serialize(mqttMessageModel.MqttPayloadModel);
+                mqttEngine.Publish(mqttMessageModel.Topic, payload);
+                
                 colorIndex = (colorIndex + 1) % colorSequence.Count;
 
                 Thread.Sleep(3000);
             }
-            // TODO turn off
-            var offPayLoad = new LightPayload { State = "OFF"/*, Color = new LightColor { Red = 0, Green = 255, Blue = 0 }*/ };
-            mqttEngine.Publish(mqttMessage.Topic, jsonConverter.Serialize(offPayLoad));
+
+            var offPayLoad = new LightMqttPayloadModel { State = "OFF" };
+            mqttEngine.Publish(mqttMessageModel.Topic, jsonConverter.Serialize(offPayLoad));
 
         }
         catch (Exception exception)
@@ -86,7 +63,27 @@ public class Application(IObserverManager observerManager, IMqttEngine mqttEngin
         }
     }
 
-    private void RegisterObservers()
+	private static List<MqttLightColorModel> CreateMqttLightColorModels()
+	{
+		List<MqttLightColorModel> colorSequence =
+		[
+			new MqttLightColorModel { Red = 255, Green = 0, Blue = 0 },
+			new MqttLightColorModel { Red = 255, Green = 128, Blue = 0 },
+			new MqttLightColorModel { Red = 255, Green = 255, Blue = 0 },
+			new MqttLightColorModel { Red = 128, Green = 255, Blue = 0 },
+			new MqttLightColorModel { Red = 0, Green = 255, Blue = 0 },
+			new MqttLightColorModel { Red = 0, Green = 255, Blue = 128 },
+			new MqttLightColorModel { Red = 0, Green = 255, Blue = 255 },
+			new MqttLightColorModel { Red = 0, Green = 128, Blue = 255 },
+			new MqttLightColorModel { Red = 0, Green = 0, Blue = 255 },
+			new MqttLightColorModel { Red = 128, Green = 0, Blue = 255 },
+			new MqttLightColorModel { Red = 255, Green = 0, Blue = 255 },
+			new MqttLightColorModel { Red = 255, Green = 0, Blue = 128 }
+		];
+		return colorSequence;
+	}
+
+	private void RegisterObservers()
     {
         observerManager.Register<string>(WriteToConsole);
         observerManager.Register<Exception>(WriteToConsole);
@@ -101,40 +98,4 @@ public class Application(IObserverManager observerManager, IMqttEngine mqttEngin
     private static void WriteToConsole(Exception exception) => System.Console.WriteLine(exception.FlattenException());
 
     private static void WriteToConsole(string message) => System.Console.WriteLine(message.AddTimePrefix());
-}
-
-public class MqttMessage
-{
-    [JsonProperty("topic")]
-    public string Topic { get; set; }
-
-    [JsonProperty("payload")]
-    public Payload Payload { get; set; }
-}
-
-
-public class Payload
-{
-
-}
-
-public class LightPayload : Payload
-{
-    [JsonProperty("state")]
-    public string State { get; set; }
-
-    [JsonProperty("color")]
-    public LightColor Color { get; set; }
-}
-
-public class LightColor
-{
-    [JsonProperty("r")]
-    public int Red { get; set; }
-
-    [JsonProperty("g")]
-    public int Green { get; set; }
-
-    [JsonProperty("b")]
-    public int Blue { get; set; }
 }
