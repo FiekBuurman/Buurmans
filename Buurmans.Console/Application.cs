@@ -45,7 +45,13 @@ public class Application(IObserverManager observerManager, IMqttEngine mqttEngin
 
             while (stopwatch.Elapsed < TimeSpan.FromMinutes(1))
             {
-				var payload = jsonConverter.Serialize(mqttMessageModel.MqttPayloadModel);
+                mqttMessageModel.MqttPayloadModel = new LightMqttPayloadModel
+                {
+                    State = "ON",
+                    ColorModel = colorSequence[colorIndex]
+                };
+
+                var payload = jsonConverter.Serialize(mqttMessageModel.MqttPayloadModel);
                 mqttEngine.Publish(mqttMessageModel.Topic, payload);
                 
                 colorIndex = (colorIndex + 1) % colorSequence.Count;
