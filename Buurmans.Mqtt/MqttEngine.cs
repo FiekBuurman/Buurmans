@@ -18,7 +18,13 @@ namespace Buurmans.Mqtt
 	{
 		private readonly IMqttClient _mqttClient = new MqttFactory().CreateMqttClient();
 
-		private async Task Connect()
+		public Task Publish(MqttMessageModel mqttMessageModel)
+		{
+			var payload = jsonConverter.Serialize(mqttMessageModel.MqttPayloadModel);
+			return Publish(mqttMessageModel.Topic, payload);
+		}
+
+        private async Task Connect()
 		{
 			var mqttSettingsModel = mqttConfigurationProvider.GetSettings();
 			var result = await ConnectAsync(mqttSettingsModel.CreateMqttClientOptions());
@@ -109,13 +115,7 @@ namespace Buurmans.Mqtt
 				ResponseInformation = exception.FlattenException()
 			};
 		}
-
-        public Task Publish(MqttMessageModel mqttMessageModel)
-		{
-			var payload = jsonConverter.Serialize(mqttMessageModel.MqttPayloadModel);
-			return Publish(mqttMessageModel.Topic, payload);
-		}
-
+		
 		private void TestSettings()
 		{
 			var factory = new MqttFactory();
