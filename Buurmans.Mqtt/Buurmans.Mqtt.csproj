@@ -49,7 +49,6 @@
     <Compile Include="Models\MqttConfigurationSettingsModel.cs" />
     <Compile Include="MqttEngine.cs" />
     <Compile Include="Models\MqttEngineResultModel.cs" />
-    <Compile Include="MqttPublisher.cs" />
     <Compile Include="Extensions\MqttSettingsModelExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
