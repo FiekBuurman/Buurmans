@@ -41,6 +41,9 @@
     <Compile Include="Interfaces\IMqttConfigurationProvider.cs" />
     <Compile Include="IMqttEngine.cs" />
     <Compile Include="Extensions\MqttClientConnectResultExtensions.cs" />
+    <Compile Include="Models\LightMqttPayloadModel.cs" />
+    <Compile Include="Models\MqttLightColorModel.cs" />
+    <Compile Include="Models\MqttMessageModel.cs" />
     <Compile Include="Models\MqttPayloadModel.cs" />
     <Compile Include="Providers\MqttConfigurationProvider.cs" />
     <Compile Include="Models\MqttConfigurationSettingsModel.cs" />
