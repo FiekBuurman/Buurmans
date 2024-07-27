@@ -85,13 +85,6 @@ namespace Buurmans.Mqtt
             if (!_mqttClient.IsConnected)
                 throw new InvalidOperationException("MQTT client is not connected.");
 
-    //        var message = new MqttApplicationMessageBuilder()
-    //            .WithTopic(topic)
-    //            .WithPayload(payload)
-    //            .WithExactlyOnceQoS()
-				//.WithRetainFlag()
-    //            .Build();
-
             var message = new MqttApplicationMessageBuilder()
 				.WithTopic(topic)
 				.WithPayload(payload)
@@ -102,8 +95,8 @@ namespace Buurmans.Mqtt
             {
                 var result = await _mqttClient.PublishAsync(message);
                 var resultMessage = result.ReasonCode == MqttClientPublishReasonCode.Success
-					? $"Successfully published message to topic '{topic}' with payload '{payload}'."
-					: $"Failed to publish message to topic '{topic}' with payload '{payload}'. Reason: {result.ReasonCode}";
+					? $"Successfully published message to topic '{topic}' with payload: \r\n{payload}"
+					: $"Failed to publish message to topic '{topic}' with payload: \r\n{payload}\r\nReason: \r\n{result.ReasonCode}";
 
                 _observerManager.NotifyChange(resultMessage);
             }
