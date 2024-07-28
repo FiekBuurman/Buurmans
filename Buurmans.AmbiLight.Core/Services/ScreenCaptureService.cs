@@ -4,10 +4,10 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-using ScreenAmbiLightToMQTT.Core.Extensions;
-using ScreenAmbiLightToMQTT.Core.Interfaces;
+using Buurmans.AmbiLight.Core.Extensions;
+using Buurmans.AmbiLight.Core.Interfaces;
 
-namespace ScreenAmbiLightToMQTT.Core.Services
+namespace Buurmans.AmbiLight.Core.Services
 {
 	internal class ScreenCaptureService : IScreenCaptureService
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace ScreenAmbiLightToMQTT.Core.Extensions
+namespace Buurmans.AmbiLight.Core.Extensions
 {
     public static class ExceptionExtension
     {

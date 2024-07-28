@@ -1,4 +1,4 @@
-﻿namespace ScreenAmbiLightToMQTT.Core.Models
+﻿namespace Buurmans.AmbiLight.Core.Models
 {
     public class MqttSettingsModel
     {

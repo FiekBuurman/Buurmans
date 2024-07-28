@@ -1,10 +1,10 @@
 ﻿using Autofac;
-using ScreenAmbiLightToMQTT.Core.Interfaces;
-using ScreenAmbiLightToMQTT.Core.Managers;
-using ScreenAmbiLightToMQTT.Core.Providers;
-using ScreenAmbiLightToMQTT.Core.Services;
+using Buurmans.AmbiLight.Core.Interfaces;
+using Buurmans.AmbiLight.Core.Managers;
+using Buurmans.AmbiLight.Core.Providers;
+using Buurmans.AmbiLight.Core.Services;
 
-namespace ScreenAmbiLightToMQTT.Core
+namespace Buurmans.AmbiLight.Core
 {
 	public class AutofacModule : Module
 	{

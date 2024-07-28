@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using ScreenAmbiLightToMQTT.Core.Controls;
+using Buurmans.AmbiLight.Core.Controls;
 
-namespace ScreenAmbiLightToMQTT.Core.Extensions
+namespace Buurmans.AmbiLight.Core.Extensions
 {
 	public static class FormExtensions
 	{

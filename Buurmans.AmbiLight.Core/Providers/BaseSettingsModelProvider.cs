@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using ScreenAmbiLightToMQTT.Core.Models;
+using Buurmans.AmbiLight.Core.Models;
 
-namespace ScreenAmbiLightToMQTT.Core.Providers
+namespace Buurmans.AmbiLight.Core.Providers
 {
 	internal class BaseSettingsModelProvider
 	{

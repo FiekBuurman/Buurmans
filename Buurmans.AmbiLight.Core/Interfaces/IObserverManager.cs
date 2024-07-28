@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ScreenAmbiLightToMQTT.Core.Interfaces;
+namespace Buurmans.AmbiLight.Core.Interfaces;
 
 public interface IObserverManager
 {

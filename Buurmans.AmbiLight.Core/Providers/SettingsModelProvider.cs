@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
+using Buurmans.AmbiLight.Core.Interfaces;
+using Buurmans.AmbiLight.Core.Models;
 using Buurmans.Common.Converters;
-using ScreenAmbiLightToMQTT.Core.Interfaces;
-using ScreenAmbiLightToMQTT.Core.Models;
 
-namespace ScreenAmbiLightToMQTT.Core.Providers
+namespace Buurmans.AmbiLight.Core.Providers
 {
 	internal class SettingsModelProvider : BaseSettingsModelProvider, ISettingsModelProvider
 	{

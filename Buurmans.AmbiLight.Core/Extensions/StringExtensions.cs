@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace ScreenAmbiLightToMQTT.Core.Extensions
+namespace Buurmans.AmbiLight.Core.Extensions
 {
     internal static class StringExtensions
     {

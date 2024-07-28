@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace ScreenAmbiLightToMQTT.Core.Controls
+namespace Buurmans.AmbiLight.Core.Controls
 {
     public class ColorCheckBox : CheckBox
     {

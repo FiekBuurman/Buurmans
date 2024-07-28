@@ -1,6 +1,6 @@
-﻿using ScreenAmbiLightToMQTT.Core.Models;
+﻿using Buurmans.AmbiLight.Core.Models;
 
-namespace ScreenAmbiLightToMQTT.Core.Interfaces;
+namespace Buurmans.AmbiLight.Core.Interfaces;
 
 public interface ISettingsModelProvider
 {

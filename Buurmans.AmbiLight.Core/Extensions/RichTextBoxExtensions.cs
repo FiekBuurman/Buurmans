@@ -1,8 +1,7 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace ScreenAmbiLightToMQTT.Core.Extensions
+namespace Buurmans.AmbiLight.Core.Extensions
 {
 	public static class RichTextBoxExtensions
 	{

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ScreenAmbiLightToMQTT.Core.Interfaces;
+using Buurmans.AmbiLight.Core.Interfaces;
 
-namespace ScreenAmbiLightToMQTT.Core.Managers;
+namespace Buurmans.AmbiLight.Core.Managers;
 
 public class ObserverManager : IObserverManager
 {

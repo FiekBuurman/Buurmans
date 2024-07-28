@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using ScreenAmbiLightToMQTT.Core.Interfaces;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using Buurmans.AmbiLight.Core.Interfaces;
 
-namespace ScreenAmbiLightToMQTT.Core.Services
+namespace Buurmans.AmbiLight.Core.Services
 {
 	internal class ColorCalculationService(ISettingsModelProvider settingsModelProvider) : IColorCalculationService
 	{
