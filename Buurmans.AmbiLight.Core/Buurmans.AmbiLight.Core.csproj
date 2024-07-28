@@ -117,6 +117,10 @@
       <Project>{4f7d22ae-5efa-4de1-a7a3-7a1d48a5ded5}</Project>
       <Name>Buurmans.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Buurmans.Mqtt\Buurmans.Mqtt.csproj">
+      <Project>{85210519-da25-46c3-8f78-8f94fe7d1035}</Project>
+      <Name>Buurmans.Mqtt</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
