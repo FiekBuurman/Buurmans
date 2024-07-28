@@ -39,28 +39,30 @@ internal class SettingsViewModel(ISettingsModelProvider settingsModelProvider, I
 
 	public void TestMqttSettingsButtonPressed(MqttConfigurationSettingsModel mqttConfigurationSettingsModel)
 	{
-		observerManager.Register<string>(AddObserverMessage);
-        observerManager.Register<Exception>(AddObserverMessage);
+		RegisterObservers();
 
-        mqttEngine.InitSettings(mqttConfigurationSettingsModel);
+		mqttEngine.InitSettings(mqttConfigurationSettingsModel);
 		mqttEngine.TestSettings(mqttConfigurationSettingsModel);
 
-        observerManager.Unregister<string>(AddObserverMessage);
-        observerManager.Unregister<Exception>(AddObserverMessage);
+        UnregisterObservers();
 
 		_settingsView.ShowMessage(_messageBuilder.ToString());
 		_messageBuilder.Clear();
     }
 
-	private void AddObserverMessage(Exception exception)
+	private void UnregisterObservers()
 	{
-		AddObserverMessage(exception.FlattenException());
-    }
+		observerManager.Unregister<string>(AddObserverMessage);
+		observerManager.Unregister<Exception>(AddObserverMessage);
+	}
 
-    private void AddObserverMessage(string message)
+	private void RegisterObservers()
 	{
-        _messageBuilder.Append(message);
-    }
+		observerManager.Register<string>(AddObserverMessage);
+		observerManager.Register<Exception>(AddObserverMessage);
+	}
 
-	private StringBuilder _messageBuilder = new StringBuilder();
+	private void AddObserverMessage(Exception exception) => AddObserverMessage(exception.FlattenException());
+	private void AddObserverMessage(string message) => _messageBuilder.Append(message);
+	private readonly StringBuilder _messageBuilder = new();
 }
