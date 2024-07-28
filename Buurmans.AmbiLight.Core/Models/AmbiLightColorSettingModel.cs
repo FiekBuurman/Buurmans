@@ -2,7 +2,7 @@
 
 namespace Buurmans.AmbiLight.Core.Models;
 
-public class ColorSettingModel
+public class AmbiLightColorSettingModel
 {
 	public Color Color { get; set; }
 

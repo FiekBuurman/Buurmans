@@ -1,9 +1,8 @@
 ﻿using System.Drawing;
 
-namespace Buurmans.AmbiLight.Core.Interfaces
+namespace Buurmans.AmbiLight.Core.Interfaces;
+
+public interface IScreenCaptureService
 {
-	public interface IScreenCaptureService
-    {
-		Bitmap CaptureScreen();
-    }
+	Bitmap CaptureScreen();
 }

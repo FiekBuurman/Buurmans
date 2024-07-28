@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2DA90803-029B-4EEB-8263-B5558D222A91}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>Buurmans.AmbiLight.Core</RootNamespace>
     <AssemblyName>Buurmans.AmbiLight.Core</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
     <LangVersion>latest</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=8.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -76,19 +79,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutofacModule.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Interfaces\IColorCalculationService.cs" />
     <Compile Include="Interfaces\IScreenCaptureService.cs" />
     <Compile Include="Interfaces\ISettingsModelProvider.cs" />
-    <Compile Include="Models\ColorSettingModel.cs" />
-    <Compile Include="Models\MqttSettingsModel.cs" />
-    <Compile Include="Models\SettingsModel.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Models\AmbiLightColorSettingModel.cs" />
+    <Compile Include="Models\AmbilLightConfigurationSettingsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\BaseSettingsModelProvider.cs" />
     <Compile Include="Providers\SettingsModelProvider.cs" />

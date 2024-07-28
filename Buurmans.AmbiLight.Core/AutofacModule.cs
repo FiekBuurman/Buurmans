@@ -1,19 +1,16 @@
 ﻿using Autofac;
 using Buurmans.AmbiLight.Core.Interfaces;
-using Buurmans.AmbiLight.Core.Managers;
 using Buurmans.AmbiLight.Core.Providers;
 using Buurmans.AmbiLight.Core.Services;
 
-namespace Buurmans.AmbiLight.Core
+namespace Buurmans.AmbiLight.Core;
+
+public class AutofacModule : Module
 {
-	public class AutofacModule : Module
+	protected override void Load(ContainerBuilder builder)
 	{
-		protected override void Load(ContainerBuilder builder)
-		{
-			builder.RegisterType<ScreenCaptureService>().As<IScreenCaptureService>().SingleInstance();
-			builder.RegisterType<ColorCalculationService>().As<IColorCalculationService>().SingleInstance();
-			builder.RegisterType<SettingsModelProvider>().As<ISettingsModelProvider>().SingleInstance();
-			builder.RegisterType<ObserverManager>().As<IObserverManager>().SingleInstance();
-		}
+		builder.RegisterType<ScreenCaptureService>().As<IScreenCaptureService>().SingleInstance();
+		builder.RegisterType<ColorCalculationService>().As<IColorCalculationService>().SingleInstance();
+		builder.RegisterType<SettingsModelProvider>().As<ISettingsModelProvider>().SingleInstance();
 	}
 }

@@ -4,56 +4,55 @@ using Buurmans.AmbiLight.Core.Interfaces;
 using Buurmans.AmbiLight.Core.Models;
 using Buurmans.Common.Converters;
 
-namespace Buurmans.AmbiLight.Core.Providers
+namespace Buurmans.AmbiLight.Core.Providers;
+
+internal class SettingsModelProvider : BaseSettingsModelProvider, ISettingsModelProvider
 {
-	internal class SettingsModelProvider : BaseSettingsModelProvider, ISettingsModelProvider
+	private readonly IJsonConverter _jsonConverter;
+
+	public SettingsModelProvider(IJsonConverter jsonConverter)
 	{
-		private readonly IJsonConverter _jsonConverter;
+		_jsonConverter = jsonConverter;
+	}
+	private string _filePath = string.Empty;
+	private AmbilLightConfigurationSettingsModel _settingsModel;
 
-		public SettingsModelProvider(IJsonConverter jsonConverter)
-		{
-			_jsonConverter = jsonConverter;
-		}
-		private string _filePath = string.Empty;
-		private SettingsModel _settingsModel;
-
-		public SettingsModel GetSettingsModel()
-		{
-			if (_settingsModel != null)
-				return _settingsModel;
-
-			EnsureFilePath();
-
-			if (!File.Exists(_filePath))
-			{
-				var defaultSettingsModel = GetDefaultSettings();
-				SaveSettings(defaultSettingsModel);
-			}
-
-			var serializedSettingsModel = File.ReadAllText(_filePath);
-			_settingsModel = _jsonConverter.Deserialize<SettingsModel>(serializedSettingsModel);
-
+	public AmbilLightConfigurationSettingsModel GetSettingsModel()
+	{
+		if (_settingsModel != null)
 			return _settingsModel;
-		}
 
-		public void SaveSettings(SettingsModel settingsModel)
+		EnsureFilePath();
+
+		if (!File.Exists(_filePath))
 		{
-			EnsureFilePath();
-			var serializeSettingsModel = _jsonConverter.Serialize(settingsModel);
-			File.WriteAllText(_filePath, serializeSettingsModel);
-
-			_settingsModel = null;
+			var defaultSettingsModel = GetDefaultSettings();
+			SaveSettings(defaultSettingsModel);
 		}
 
+		var serializedSettingsModel = File.ReadAllText(_filePath);
+		_settingsModel = _jsonConverter.Deserialize<AmbilLightConfigurationSettingsModel>(serializedSettingsModel);
+
+		return _settingsModel;
+	}
+
+	public void SaveSettings(AmbilLightConfigurationSettingsModel settingsModel)
+	{
+		EnsureFilePath();
+		var serializeSettingsModel = _jsonConverter.Serialize(settingsModel);
+		File.WriteAllText(_filePath, serializeSettingsModel);
+
+		_settingsModel = null;
+	}
 
 
-		private void EnsureFilePath()
-		{
-			if (!string.IsNullOrWhiteSpace(_filePath))
-				return;
 
-			var appDomain = AppDomain.CurrentDomain.BaseDirectory;
-			_filePath = $"{appDomain}Settings.config";
-		}
+	private void EnsureFilePath()
+	{
+		if (!string.IsNullOrWhiteSpace(_filePath))
+			return;
+
+		var appDomain = AppDomain.CurrentDomain.BaseDirectory;
+		_filePath = $"{appDomain}Settings.config";
 	}
 }
