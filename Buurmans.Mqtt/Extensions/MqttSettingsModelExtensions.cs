@@ -11,7 +11,7 @@ namespace Buurmans.Mqtt.Extensions
 			return new MqttClientOptionsBuilder()
 				.WithClientId(settings.ClientId)
 				.WithTcpServer(settings.BrokerUrl, settings.Port)
-				.WithCredentials(settings.Username, settings.Password)
+				.WithCredentials(settings.UserName, settings.Password)
 				.WithCleanSession(false)
 				.WithKeepAlivePeriod(TimeSpan.FromSeconds(60))
 				.WithTimeout(TimeSpan.FromSeconds(60))

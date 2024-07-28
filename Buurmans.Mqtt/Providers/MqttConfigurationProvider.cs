@@ -22,7 +22,7 @@ namespace Buurmans.Mqtt.Providers
                 Port = 1883,
                 Topic = string.Empty,
                 ClientId = string.Empty,
-                Username = string.Empty,
+                UserName = string.Empty,
                 Password = string.Empty
             };
 

@@ -54,7 +54,7 @@ namespace Buurmans.AmbiLight.Form.Views
 				Port = (int)PortNumericUpDown.Value,
 				Timeout = (int)TimeoutNumericUpDown.Value,
 				ClientId = ClientIdTextBox.Text,
-				Username = UserNameTextBox.Text,
+				UserName = UserNameTextBox.Text,
 				Password = PasswordTextBox.Text,
 				Topic = TopicTextBox.Text
 			};
@@ -74,7 +74,7 @@ namespace Buurmans.AmbiLight.Form.Views
 			PortNumericUpDown.Value = mqttSettings.Port;
 			TimeoutNumericUpDown.Value = (decimal)mqttSettings.Timeout;
 			ClientIdTextBox.Text = mqttSettings.ClientId;
-			UserNameTextBox.Text = mqttSettings.Username;
+			UserNameTextBox.Text = mqttSettings.UserName;
 			PasswordTextBox.Text = mqttSettings.Password;
 			TopicTextBox.Text = mqttSettings.Topic;
 		}
