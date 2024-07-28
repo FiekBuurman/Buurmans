@@ -35,6 +35,7 @@ internal class SettingsViewModel(ISettingsModelProvider settingsModelProvider, I
 
 	public void TestMqttSettingsButtonPressed(MqttConfigurationSettingsModel mqttConfigurationSettingsModel)
 	{
+		mqttEngine.InitSettings(mqttConfigurationSettingsModel);
 		mqttEngine.TestSettings(mqttConfigurationSettingsModel);
 	}
 }

@@ -5,11 +5,12 @@ namespace Buurmans.Mqtt
 {
     public interface IMqttEngine
     {
-		Task Connect();
+		void InitSettings(MqttConfigurationSettingsModel mqttConfigurationSettingsModel);
+        Task Connect();
 		Task Disconnect();
 		//Task Publish(string topic, string payload);
 		Task Publish(MqttMessageModel mqttMessageModel);
-		void TestSettings(MqttConfigurationSettingsModel mqttConfigurationSettingsModel = null);
+		void TestSettings(MqttConfigurationSettingsModel mqttConfigurationSettingsModel);
 	}
 }
 	

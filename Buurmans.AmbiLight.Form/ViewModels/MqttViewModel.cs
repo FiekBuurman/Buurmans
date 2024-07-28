@@ -20,6 +20,8 @@ public class MqttViewModel(ISettingsModelProvider settingsModelProvider, IMqttEn
 
 	public async void ConnectButtonPressed()
 	{
+		var mqttSettings = settingsModelProvider.GetSettingsModel().MqttConfigurationSettingsModel;
+		mqttEngine.InitSettings(mqttSettings);
 		await mqttEngine.Connect();
 	}
 

@@ -72,7 +72,7 @@ namespace Buurmans.AmbiLight.Form.Views
 		{
 			BrokerTextBox.Text = mqttSettings.BrokerUrl;
 			PortNumericUpDown.Value = mqttSettings.Port;
-			TimeoutNumericUpDown.Value = (decimal)mqttSettings.Timeout;
+			TimeoutNumericUpDown.Value = (decimal)mqttSettings.Timeout >= 10 ? (decimal)mqttSettings.Timeout : 10;
 			ClientIdTextBox.Text = mqttSettings.ClientId;
 			UserNameTextBox.Text = mqttSettings.UserName;
 			PasswordTextBox.Text = mqttSettings.Password;
