@@ -24,7 +24,7 @@ namespace Buurmans.Mqtt
 			return Publish(mqttMessageModel.Topic, payload);
 		}
 
-        private async Task Connect()
+        public async Task Connect()
 		{
 			var mqttSettingsModel = mqttConfigurationProvider.GetSettings();
 			var result = await ConnectAsync(mqttSettingsModel.CreateMqttClientOptions());
@@ -52,7 +52,7 @@ namespace Buurmans.Mqtt
 			}
 		}
 
-		private async Task Disconnect()
+		public async Task Disconnect()
 		{
 			var result = await DisconnectAsync();
 			observerManager.NotifyChange(result.FormatResult());
@@ -116,11 +116,11 @@ namespace Buurmans.Mqtt
 			};
 		}
 		
-		private void TestSettings()
+		public void TestSettings(MqttConfigurationSettingsModel mqttConfigurationSettingsModel = null)
 		{
 			var factory = new MqttFactory();
 			var client = factory.CreateMqttClient();
-            var mqttSettingsModel = mqttConfigurationProvider.GetSettings();
+			var mqttSettingsModel = mqttConfigurationSettingsModel ?? mqttConfigurationProvider.GetSettings();
 
             try
 			{
