@@ -35,12 +35,19 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutofacModule.cs" />
+    <Compile Include="Controls\ColorCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Converters\IJsonConverter.cs" />
     <Compile Include="Converters\JsonConverter.cs" />
     <Compile Include="Extensions\ExceptionExtension.cs" />
+    <Compile Include="Extensions\FormExtensions.cs" />
+    <Compile Include="Extensions\RichTextBoxExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Interfaces\IObserverManager.cs" />
     <Compile Include="Managers\ObserverManager.cs" />

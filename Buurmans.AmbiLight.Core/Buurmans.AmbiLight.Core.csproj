@@ -76,13 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutofacModule.cs" />
-    <Compile Include="Controls\ColorCheckBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Extensions\ExceptionExtension.cs" />
-    <Compile Include="Extensions\FormExtensions.cs" />
-    <Compile Include="Extensions\RichTextBoxExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,10 +83,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IColorCalculationService.cs" />
-    <Compile Include="Interfaces\IObserverManager.cs" />
     <Compile Include="Interfaces\IScreenCaptureService.cs" />
     <Compile Include="Interfaces\ISettingsModelProvider.cs" />
-    <Compile Include="Managers\ObserverManager.cs" />
     <Compile Include="Models\ColorSettingModel.cs" />
     <Compile Include="Models\MqttSettingsModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
@@ -132,5 +123,6 @@
       <Name>Buurmans.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

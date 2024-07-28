@@ -1,9 +1,8 @@
 ﻿using System.Drawing;
 
-namespace Buurmans.AmbiLight.Core.Interfaces
+namespace Buurmans.AmbiLight.Core.Interfaces;
+
+public interface IColorCalculationService
 {
-	public interface IColorCalculationService
-    {
-		Color CalculateAverageColor(Bitmap bitmap);
-    }
+	Color CalculateAverageColor(Bitmap bitmap);
 }

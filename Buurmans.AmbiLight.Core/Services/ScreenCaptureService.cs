@@ -4,8 +4,8 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-using Buurmans.AmbiLight.Core.Extensions;
 using Buurmans.AmbiLight.Core.Interfaces;
+using Buurmans.Common.Extensions;
 
 namespace Buurmans.AmbiLight.Core.Services
 {

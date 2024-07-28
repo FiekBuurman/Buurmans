@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace Buurmans.AmbiLight.Core.Controls
+namespace Buurmans.Common.Controls
 {
     public class ColorCheckBox : CheckBox
     {

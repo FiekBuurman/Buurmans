@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace Buurmans.AmbiLight.Core.Extensions
+namespace Buurmans.Common.Extensions
 {
 	public static class RichTextBoxExtensions
 	{
