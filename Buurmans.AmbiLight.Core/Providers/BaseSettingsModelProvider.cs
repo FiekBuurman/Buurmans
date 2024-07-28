@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using Buurmans.AmbiLight.Core.Models;
+using Buurmans.Mqtt.Models;
 
 namespace Buurmans.AmbiLight.Core.Providers;
 
@@ -13,7 +14,8 @@ internal class BaseSettingsModelProvider
 		{
 			PixelSkipSteps = 10,
 			DelayInMilliseconds = 1000,
-			ColorSettingModels = CreateColorSettingModels()
+			ColorSettingModels = CreateColorSettingModels(),
+			MqttConfigurationSettingsModel = new MqttConfigurationSettingsModel()
 		};
 			
 		return settingsModel;
@@ -28,7 +30,7 @@ internal class BaseSettingsModelProvider
 			})
 			.ToList();
 	}
-		
+	
 	private static IEnumerable<Color> CreateDefaultColorList()
 	{
 		var colorList = new List<Color>
