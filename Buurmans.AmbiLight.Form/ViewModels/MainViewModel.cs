@@ -3,9 +3,12 @@ using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using Buurmans.AmbiLight.Core.Interfaces;
+using Buurmans.AmbiLight.Core.Models;
 using Buurmans.AmbiLight.Form.Interfaces;
 using Buurmans.Common.Extensions;
 using Buurmans.Common.Interfaces;
+using Buurmans.Mqtt;
+using Buurmans.Mqtt.Models;
 
 namespace Buurmans.AmbiLight.Form.ViewModels
 {
@@ -14,7 +17,8 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 		IScreenCaptureService screenCaptureService,
 		IAmbiLightConfigurationProvider settingsProvider, 
 		ISettingsView settingsView, 
-		IObserverManager observerManager
+		IObserverManager observerManager,
+		IMqttEngine mqttEngine
 		) : IMainViewModel
 	{
 		private IMainView _mainView;
@@ -39,19 +43,26 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 			_shouldKeepRunning = true;
 
 			var settingsModel = settingsProvider.GetSettings();
-			
-			Task.Factory.StartNew(() =>
+            var mqttMessage = CreateMqttMessage(settingsModel);
+			mqttEngine.InitSettings(settingsModel.MqttConfigurationSettingsModel);
+
+            Task.Factory.StartNew(() =>
 			{
 				while (_shouldKeepRunning)
 				{
 					Color color;
 					try
-					{
-						var screen = screenCaptureService.CaptureScreen();
-						color = colorCalculationService.CalculateAverageColor(screen);
-						observerManager.NotifyChange($"Captured Color: R:{color.R} G:{color.G} B:{color.B}");
-					}
-					catch (Exception exception)
+                    {
+                        var screen = screenCaptureService.CaptureScreen();
+                        color = colorCalculationService.CalculateAverageColor(screen);
+                        observerManager.NotifyChange($"Captured Color: R:{color.R} G:{color.G} B:{color.B}");
+
+                        UpdateMqttColorModel(mqttMessage, color);
+
+                        mqttEngine.Publish(mqttMessage);
+
+                    }
+                    catch (Exception exception)
 					{
 						color = Color.Red;
 						observerManager.NotifyChange(exception);
@@ -63,7 +74,36 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 			});
 		}
 
-		public void ShowSettingsButtonPressed()
+        private static void UpdateMqttColorModel(MqttMessageModel mqttMessage, Color color)
+        {
+            var lightColorModel = new MqttLightColorModel();
+            lightColorModel.UpdateColor(color);
+
+            mqttMessage.MqttPayloadModel = new LightMqttPayloadModel
+            {
+                State = "ON",
+                ColorModel = lightColorModel
+            };
+        }
+
+        private static MqttMessageModel CreateMqttMessage(AmbiLightConfigurationSettingsModel settingsModel)
+        {
+            return new MqttMessageModel(settingsModel.MqttConfigurationSettingsModel.Topic)
+            {
+                MqttPayloadModel = new LightMqttPayloadModel
+                {
+                    State = "ON",
+                    ColorModel = new MqttLightColorModel
+                    {
+                        Red = 255,
+                        Green = 0,
+                        Blue = 0
+                    }
+                }
+            };
+        }
+
+        public void ShowSettingsButtonPressed()
 		{
 			settingsView.ShowView();
 		}
