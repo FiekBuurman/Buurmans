@@ -55,7 +55,11 @@ namespace Buurmans.Common.Extensions
 				ToggleUserInput(con, enabled);
 			}
 
-			InvokeIfRequired(() => { control.Enabled = enabled; });
+			InvokeIfRequired(() => 
+			{
+				if (control.GetType() != typeof(RichTextBox))
+					control.Enabled = enabled; 
+			});
 
 		}
 
