@@ -10,17 +10,17 @@ using Buurmans.Mqtt.Models;
 namespace Buurmans.AmbiLight.Core.Providers;
 
 internal class AmbiLightConfigurationProvider(IJsonConverter jsonConverter) 
-	: BaseConfigurationProvider<AmbilLightConfigurationSettingsModel>(jsonConverter), IAmbiLightConfigurationProvider
+	: BaseConfigurationProvider<AmbiLightConfigurationSettingsModel>(jsonConverter), IAmbiLightConfigurationProvider
 {
-	public new AmbilLightConfigurationSettingsModel GetSettings()
+	public new AmbiLightConfigurationSettingsModel GetSettings()
 	{
 		var settings = base.GetSettings();
 		return settings ?? CreateDefaultSettings();
 	}
 
-	private AmbilLightConfigurationSettingsModel CreateDefaultSettings()
+	private AmbiLightConfigurationSettingsModel CreateDefaultSettings()
 	{
-		var settingsModel = new AmbilLightConfigurationSettingsModel
+		var settingsModel = new AmbiLightConfigurationSettingsModel
 		{
 			PixelSkipSteps = 10,
 			DelayInMilliseconds = 1000,

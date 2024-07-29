@@ -19,9 +19,9 @@ internal class SettingsViewModel(IAmbiLightConfigurationProvider configurationPr
 		_settingsView = settingsView;
 	}
 
-	public void SaveSettingsButtonPressed(AmbilLightConfigurationSettingsModel ambilLightConfigurationSettingsModel)
+	public void SaveSettingsButtonPressed(AmbiLightConfigurationSettingsModel ambiLightConfigurationSettingsModel)
 	{
-		configurationProvider.SaveSettings(ambilLightConfigurationSettingsModel);
+		configurationProvider.SaveSettings(ambiLightConfigurationSettingsModel);
 		_settingsView.CloseView();
 	}
 

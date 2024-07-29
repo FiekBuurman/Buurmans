@@ -84,7 +84,7 @@
     <Compile Include="Interfaces\IColorCalculationService.cs" />
     <Compile Include="Interfaces\IScreenCaptureService.cs" />
     <Compile Include="Models\AmbiLightColorSettingModel.cs" />
-    <Compile Include="Models\AmbilLightConfigurationSettingsModel.cs" />
+    <Compile Include="Models\AmbiLightConfigurationSettingsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ColorCalculationService.cs" />
     <Compile Include="Services\ScreenCaptureService.cs" />

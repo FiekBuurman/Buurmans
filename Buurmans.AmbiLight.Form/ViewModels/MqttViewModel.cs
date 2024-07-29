@@ -23,8 +23,8 @@ public class MqttViewModel(
 
 	public async void ConnectButtonPressed()
 	{
-		var ambilLightConfigurationSettingsModel = configurationProvider.GetSettings();
-		var mqttSettings = ambilLightConfigurationSettingsModel.MqttConfigurationSettingsModel;
+		var ambiLightConfigurationSettingsModel = configurationProvider.GetSettings();
+		var mqttSettings = ambiLightConfigurationSettingsModel.MqttConfigurationSettingsModel;
 		mqttEngine.InitSettings(mqttSettings);	
 		await mqttEngine.Connect();
 	}

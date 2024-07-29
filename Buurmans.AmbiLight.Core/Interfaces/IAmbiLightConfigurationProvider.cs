@@ -3,7 +3,7 @@ using Buurmans.Common.Interfaces;
 
 namespace Buurmans.AmbiLight.Core.Interfaces;
 
-public interface IAmbiLightConfigurationProvider : IBaseConfigurationProvider<AmbilLightConfigurationSettingsModel>
+public interface IAmbiLightConfigurationProvider : IBaseConfigurationProvider<AmbiLightConfigurationSettingsModel>
 {
-	new AmbilLightConfigurationSettingsModel GetSettings();
+	new AmbiLightConfigurationSettingsModel GetSettings();
 }

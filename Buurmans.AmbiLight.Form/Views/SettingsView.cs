@@ -25,7 +25,7 @@ namespace Buurmans.AmbiLight.Form.Views
 			_settingsViewModel.LoadSettings();
 		}
 
-		public void LoadSettings(AmbilLightConfigurationSettingsModel settingsModel) => SetUserInputFromSettingsModel(settingsModel);
+		public void LoadSettings(AmbiLightConfigurationSettingsModel settingsModel) => SetUserInputFromSettingsModel(settingsModel);
 
 		private void SaveSettingsButton_Click(object sender, EventArgs e)
 		{
@@ -35,9 +35,9 @@ namespace Buurmans.AmbiLight.Form.Views
 
 		private void ResetSettingsButton_Click(object sender, EventArgs e) => _settingsViewModel.ResetSettingsButtonPressed();
 
-		private AmbilLightConfigurationSettingsModel CreateSettingsModelFromUserInput()
+		private AmbiLightConfigurationSettingsModel CreateSettingsModelFromUserInput()
 		{
-			return new AmbilLightConfigurationSettingsModel
+			return new AmbiLightConfigurationSettingsModel
             {
 				PixelSkipSteps = (int)PixelSkipStepsNumericUpDown.Value,
 				DelayInMilliseconds = (int)DelayInMillisecondsNumericUpDown.Value,
@@ -60,7 +60,7 @@ namespace Buurmans.AmbiLight.Form.Views
 			};
 		}
 
-		private void SetUserInputFromSettingsModel(AmbilLightConfigurationSettingsModel settingsModel)
+		private void SetUserInputFromSettingsModel(AmbiLightConfigurationSettingsModel settingsModel)
 		{
 			PixelSkipStepsNumericUpDown.Value = settingsModel.PixelSkipSteps;
 			DelayInMillisecondsNumericUpDown.Value = settingsModel.DelayInMilliseconds;

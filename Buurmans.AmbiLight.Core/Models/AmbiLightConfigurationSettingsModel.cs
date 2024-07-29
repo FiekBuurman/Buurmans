@@ -3,7 +3,7 @@ using Buurmans.Mqtt.Models;
 
 namespace Buurmans.AmbiLight.Core.Models;
 
-public class AmbilLightConfigurationSettingsModel
+public class AmbiLightConfigurationSettingsModel
 {
 	public int PixelSkipSteps { get; set; }
 	public int DelayInMilliseconds { get; set; }
