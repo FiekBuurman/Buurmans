@@ -45,6 +45,7 @@
     </Compile>
     <Compile Include="Converters\IJsonConverter.cs" />
     <Compile Include="Converters\JsonConverter.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Extensions\ExceptionExtension.cs" />
     <Compile Include="Extensions\FormExtensions.cs" />
     <Compile Include="Extensions\RichTextBoxExtensions.cs" />
