@@ -1,4 +1,4 @@
-﻿namespace Buurmans.AmbiLight.Form.Interfaces
+﻿namespace Buurmans.Common.Interfaces
 {
     public interface IBaseView
     {

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
-using Buurmans.AmbiLight.Form.Interfaces;
+using Buurmans.Common.Interfaces;
 
-namespace Buurmans.AmbiLight.Form.Views;
+namespace Buurmans.Common.Views;
 
 public class BaseView : System.Windows.Forms.Form, IBaseView
 {
