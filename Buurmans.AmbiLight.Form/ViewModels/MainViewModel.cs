@@ -48,27 +48,36 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 
             Task.Factory.StartNew(() =>
 			{
+				var previousColor = Color.Empty;
+
 				while (_shouldKeepRunning)
 				{
-					Color color;
+					Color currentColor;
 					try
                     {
                         var screen = screenCaptureService.CaptureScreen();
-                        color = colorCalculationService.CalculateAverageColor(screen);
-                        observerManager.NotifyChange($"Captured Color: R:{color.R} G:{color.G} B:{color.B}");
+                        currentColor = colorCalculationService.CalculateAverageColor(screen);
 
-                        UpdateMqttColorModel(mqttMessage, color);
-
-                        mqttEngine.Publish(mqttMessage);
+						if (currentColor != previousColor)
+						{
+							observerManager.NotifyChange($"Captured {currentColor.ToRgbString()}");
+							UpdateMqttColorModel(mqttMessage, currentColor);
+							mqttEngine.Publish(mqttMessage);
+							previousColor = currentColor;
+						}
+						else 
+						{
+                            observerManager.NotifyChange($"Skipped {currentColor.ToRgbString()}");
+                        }
 
                     }
                     catch (Exception exception)
 					{
-						color = Color.Red;
+						currentColor = Color.Red;
 						observerManager.NotifyChange(exception);
 					}
 
-					_mainView.UpdateBackGroundColor(color);
+					_mainView.UpdateBackGroundColor(currentColor);
                     Thread.Sleep(settingsModel.DelayInMilliseconds);
 				}
 			});
