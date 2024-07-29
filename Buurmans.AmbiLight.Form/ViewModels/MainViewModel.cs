@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using Buurmans.AmbiLight.Core.Interfaces;
 using Buurmans.AmbiLight.Form.Interfaces;
 using Buurmans.Common.Extensions;
+using Buurmans.Common.Interfaces;
 
 namespace Buurmans.AmbiLight.Form.ViewModels
 {
@@ -13,7 +13,8 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 		IColorCalculationService colorCalculationService, 
 		IScreenCaptureService screenCaptureService,
 		IAmbiLightConfigurationProvider settingsProvider, 
-		ISettingsView settingsView, IMqttView mqttView
+		ISettingsView settingsView, 
+		IObserverManager observerManager
 		) : IMainViewModel
 	{
 		private IMainView _mainView;
@@ -22,7 +23,9 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 		public void Init(IMainView mainView)
 		{
 			_mainView = mainView;
-		}
+			observerManager.Register<Exception>(_mainView.WriteException);
+			observerManager.Register<string>(_mainView.WriteMessage);
+        }
 
 		public void StopButtonPressed()
 		{
@@ -46,11 +49,12 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 					{
 						var screen = screenCaptureService.CaptureScreen();
 						color = colorCalculationService.CalculateAverageColor(screen);
-                    }
+						observerManager.NotifyChange($"Captured Color: R:{color.R} G:{color.G} B:{color.B}");
+					}
 					catch (Exception exception)
 					{
 						color = Color.Red;
-						Debug.Write(exception.FlattenException());
+						observerManager.NotifyChange(exception);
 					}
 
 					_mainView.UpdateBackGroundColor(color);
@@ -62,11 +66,6 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 		public void ShowSettingsButtonPressed()
 		{
 			settingsView.ShowView();
-		}
-
-		public void ShowMqttButtonPressed()
-		{
-			mqttView.ShowView();
 		}
 	}
 }

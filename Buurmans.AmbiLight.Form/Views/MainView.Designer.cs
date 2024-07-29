@@ -34,13 +34,13 @@
             this.CurrentColorToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.OutputPanel = new System.Windows.Forms.Panel();
             this.ShowSettingsButton = new System.Windows.Forms.Button();
-            this.MqttButton = new System.Windows.Forms.Button();
+            this.OutputRichTextBox = new System.Windows.Forms.RichTextBox();
             this.MainStatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // StartButton
             // 
-            this.StartButton.Location = new System.Drawing.Point(12, 12);
+            this.StartButton.Location = new System.Drawing.Point(12, 13);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(200, 50);
             this.StartButton.TabIndex = 0;
@@ -64,15 +64,15 @@
             this.MainStatusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CurrentColorToolStripStatusLabel});
-            this.MainStatusStrip.Location = new System.Drawing.Point(0, 268);
+            this.MainStatusStrip.Location = new System.Drawing.Point(0, 507);
             this.MainStatusStrip.Name = "MainStatusStrip";
-            this.MainStatusStrip.Size = new System.Drawing.Size(424, 22);
+            this.MainStatusStrip.Size = new System.Drawing.Size(425, 22);
             this.MainStatusStrip.TabIndex = 2;
             // 
             // CurrentColorToolStripStatusLabel
             // 
             this.CurrentColorToolStripStatusLabel.Name = "CurrentColorToolStripStatusLabel";
-            this.CurrentColorToolStripStatusLabel.Size = new System.Drawing.Size(0, 16);
+            this.CurrentColorToolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // OutputPanel
             // 
@@ -83,7 +83,7 @@
             // 
             // ShowSettingsButton
             // 
-            this.ShowSettingsButton.Location = new System.Drawing.Point(12, 240);
+            this.ShowSettingsButton.Location = new System.Drawing.Point(212, 240);
             this.ShowSettingsButton.Name = "ShowSettingsButton";
             this.ShowSettingsButton.Size = new System.Drawing.Size(200, 25);
             this.ShowSettingsButton.TabIndex = 4;
@@ -91,22 +91,23 @@
             this.ShowSettingsButton.UseVisualStyleBackColor = true;
             this.ShowSettingsButton.Click += new System.EventHandler(this.ShowSettingsButton_Click);
             // 
-            // MqttButton
+            // OutputRichTextBox
             // 
-            this.MqttButton.Location = new System.Drawing.Point(218, 240);
-            this.MqttButton.Name = "MqttButton";
-            this.MqttButton.Size = new System.Drawing.Size(194, 25);
-            this.MqttButton.TabIndex = 5;
-            this.MqttButton.Text = "MQTT";
-            this.MqttButton.UseVisualStyleBackColor = true;
-            this.MqttButton.Click += new System.EventHandler(this.MqttButton_Click);
+            this.OutputRichTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.OutputRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.OutputRichTextBox.Location = new System.Drawing.Point(7, 271);
+            this.OutputRichTextBox.Name = "OutputRichTextBox";
+            this.OutputRichTextBox.Size = new System.Drawing.Size(406, 233);
+            this.OutputRichTextBox.TabIndex = 5;
+            this.OutputRichTextBox.Text = "";
+            this.OutputRichTextBox.TextChanged += new System.EventHandler(this.OutputRichTextBox_TextChanged);
             // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(424, 290);
-            this.Controls.Add(this.MqttButton);
+            this.ClientSize = new System.Drawing.Size(425, 529);
+            this.Controls.Add(this.OutputRichTextBox);
             this.Controls.Add(this.ShowSettingsButton);
             this.Controls.Add(this.OutputPanel);
             this.Controls.Add(this.MainStatusStrip);
@@ -132,6 +133,6 @@
         private System.Windows.Forms.ToolStripStatusLabel CurrentColorToolStripStatusLabel;
         private System.Windows.Forms.Panel OutputPanel;
         private System.Windows.Forms.Button ShowSettingsButton;
-        private System.Windows.Forms.Button MqttButton;
+        private System.Windows.Forms.RichTextBox OutputRichTextBox;
     }
 }

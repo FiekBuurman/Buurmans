@@ -6,6 +6,5 @@
 		void StopButtonPressed();
 		void StartButtonPressed();
 		void ShowSettingsButtonPressed();
-		void ShowMqttButtonPressed();
 	}
 }

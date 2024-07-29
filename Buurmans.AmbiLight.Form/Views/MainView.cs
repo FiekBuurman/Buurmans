@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using Buurmans.AmbiLight.Form.Interfaces;
 using Buurmans.Common.Extensions;
 
@@ -49,9 +50,26 @@ namespace Buurmans.AmbiLight.Form.Views
 			_mainViewModel.ShowSettingsButtonPressed();
 		}
 
-        private void MqttButton_Click(object sender, System.EventArgs e)
+		public void WriteException(Exception exception)
+		{
+			this.InvokeIfRequired(() =>
+			{
+				OutputRichTextBox.AppendText(exception.FlattenException(), Color.Red);
+			});
+		}
+
+		public void WriteMessage(string message)
+		{
+			this.InvokeIfRequired(() =>
+			{
+				OutputRichTextBox.AppendText(message, Color.LightGreen);
+			});
+		}
+
+        private void OutputRichTextBox_TextChanged(object sender, System.EventArgs e)
         {
-			_mainViewModel.ShowMqttButtonPressed();
+			OutputRichTextBox.SelectionStart = OutputRichTextBox.Text.Length;
+			OutputRichTextBox.ScrollToCaret();
         }
     }
 }
