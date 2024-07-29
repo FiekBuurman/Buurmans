@@ -17,10 +17,7 @@ internal static class ApplicationSetup
 		builder.RegisterType<MainViewModel>().As<IMainViewModel>().SingleInstance();
 		builder.RegisterType<SettingsView>().As<ISettingsView>().SingleInstance();
 		builder.RegisterType<SettingsViewModel>().As<ISettingsViewModel>().SingleInstance();
-		builder.RegisterType<MqttViewModel>().As<IMqttViewModel>().SingleInstance();
-		builder.RegisterType<MqttView>().As<IMqttView>().SingleInstance();
 		
-
 		return builder.Build();
 	}
 }
