@@ -61,16 +61,19 @@ namespace Buurmans.AmbiLight.Form.Views
 
 		public void WriteMessage(string message)
 		{
-			this.InvokeIfRequired(() =>
+            this.InvokeIfRequired(() =>
 			{
-				OutputRichTextBox.AppendText(message, Color.LightGreen);
+                OutputRichTextBox.AppendText(message, Color.LightGreen);
 			});
 		}
 
         private void OutputRichTextBox_TextChanged(object sender, System.EventArgs e)
         {
-			OutputRichTextBox.SelectionStart = OutputRichTextBox.Text.Length;
-			OutputRichTextBox.ScrollToCaret();
+            if (OutputRichTextBox.Lines.Length > 99)
+                OutputRichTextBox.ResetText();
+
+            OutputRichTextBox.SelectionStart = OutputRichTextBox.Text.Length;
+            OutputRichTextBox.ScrollToCaret();
         }
     }
 }
