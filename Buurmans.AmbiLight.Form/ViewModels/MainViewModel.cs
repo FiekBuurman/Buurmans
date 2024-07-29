@@ -12,8 +12,9 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 	internal class MainViewModel(
 		IColorCalculationService colorCalculationService, 
 		IScreenCaptureService screenCaptureService,
-		ISettingsModelProvider settingsModelProvider, 
-		ISettingsView settingsView, IMqttView mqttView) : IMainViewModel
+		IAmbiLightConfigurationProvider settingsProvider, 
+		ISettingsView settingsView, IMqttView mqttView
+		) : IMainViewModel
 	{
 		private IMainView _mainView;
 		private bool _shouldKeepRunning;
@@ -34,7 +35,7 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 		{
 			_shouldKeepRunning = true;
 
-			var settingsModel = settingsModelProvider.GetSettingsModel();
+			var settingsModel = settingsProvider.GetSettings();
 			
 			Task.Factory.StartNew(() =>
 			{

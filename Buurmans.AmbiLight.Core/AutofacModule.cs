@@ -13,6 +13,6 @@ public class AutofacModule : Module
 		builder.RegisterModule<Buurmans.Mqtt.AutofacModule>();
 		builder.RegisterType<ScreenCaptureService>().As<IScreenCaptureService>().SingleInstance();
 		builder.RegisterType<ColorCalculationService>().As<IColorCalculationService>().SingleInstance();
-		builder.RegisterType<SettingsModelProvider>().As<ISettingsModelProvider>().SingleInstance();
+		builder.RegisterType<AmbiLightConfigurationProvider>().As<IAmbiLightConfigurationProvider>().SingleInstance();
 	}
 }

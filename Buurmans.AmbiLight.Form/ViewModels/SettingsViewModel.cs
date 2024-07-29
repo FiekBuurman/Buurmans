@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Buurmans.AmbiLight.Form.ViewModels;
 
-internal class SettingsViewModel(ISettingsModelProvider settingsModelProvider, IMqttEngine mqttEngine, IObserverManager observerManager) : ISettingsViewModel
+internal class SettingsViewModel(IAmbiLightConfigurationProvider configurationProvider, IMqttEngine mqttEngine, IObserverManager observerManager) : ISettingsViewModel
 {
 	private ISettingsView _settingsView;
 
@@ -21,19 +21,19 @@ internal class SettingsViewModel(ISettingsModelProvider settingsModelProvider, I
 
 	public void SaveSettingsButtonPressed(AmbilLightConfigurationSettingsModel ambilLightConfigurationSettingsModel)
 	{
-		settingsModelProvider.SaveSettings(ambilLightConfigurationSettingsModel);
+		configurationProvider.SaveSettings(ambilLightConfigurationSettingsModel);
 		_settingsView.CloseView();
 	}
 
 	public void LoadSettings()
 	{
-		var settingsModel = settingsModelProvider.GetSettingsModel();
+		var settingsModel = configurationProvider.GetSettings();
 		_settingsView.LoadSettings(settingsModel);
     }
 
 	public void ResetSettingsButtonPressed()
 	{
-		var settingsModel = settingsModelProvider.GetSettingsModel();
+		var settingsModel = configurationProvider.GetSettings();
 		_settingsView.LoadSettings(settingsModel);
     }
 

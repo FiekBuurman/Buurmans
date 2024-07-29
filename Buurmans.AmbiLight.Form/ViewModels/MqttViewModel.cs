@@ -6,7 +6,10 @@ using Buurmans.Mqtt;
 
 namespace Buurmans.AmbiLight.Form.ViewModels;
 
-public class MqttViewModel(ISettingsModelProvider settingsModelProvider, IMqttEngine mqttEngine, IObserverManager observerManager) : IMqttViewModel
+public class MqttViewModel(
+	IAmbiLightConfigurationProvider configurationProvider, 
+	IMqttEngine mqttEngine, 
+	IObserverManager observerManager) : IMqttViewModel
 {
 	private IMqttView _mqttView;
 
@@ -20,8 +23,9 @@ public class MqttViewModel(ISettingsModelProvider settingsModelProvider, IMqttEn
 
 	public async void ConnectButtonPressed()
 	{
-		var mqttSettings = settingsModelProvider.GetSettingsModel().MqttConfigurationSettingsModel;
-		mqttEngine.InitSettings(mqttSettings);
+		var ambilLightConfigurationSettingsModel = configurationProvider.GetSettings();
+		var mqttSettings = ambilLightConfigurationSettingsModel.MqttConfigurationSettingsModel;
+		mqttEngine.InitSettings(mqttSettings);	
 		await mqttEngine.Connect();
 	}
 

@@ -7,11 +7,13 @@ using Buurmans.AmbiLight.Core.Interfaces;
 
 namespace Buurmans.AmbiLight.Core.Services;
 
-internal class ColorCalculationService(ISettingsModelProvider settingsModelProvider) : IColorCalculationService
+internal class ColorCalculationService(
+	IAmbiLightConfigurationProvider settingsProvider
+	) : IColorCalculationService
 {
 	public Color CalculateAverageColor(Bitmap bitmap)
 	{
-		var settingsModel = settingsModelProvider.GetSettingsModel();
+		var settingsModel = settingsProvider.GetSettings();
 		var averageColor = GetAverageColor(bitmap, settingsModel.PixelSkipSteps);
 		var allowedColors = settingsModel.ColorSettingModels.Where(x => x.Allowed).Select(o => o.Color).ToList();
 		return FindClosestColor(allowedColors, averageColor);

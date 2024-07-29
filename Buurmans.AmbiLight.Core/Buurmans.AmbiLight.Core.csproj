@@ -83,12 +83,9 @@
     <Compile Include="Interfaces\IAmbiLightConfigurationProvider.cs" />
     <Compile Include="Interfaces\IColorCalculationService.cs" />
     <Compile Include="Interfaces\IScreenCaptureService.cs" />
-    <Compile Include="Interfaces\ISettingsModelProvider.cs" />
     <Compile Include="Models\AmbiLightColorSettingModel.cs" />
     <Compile Include="Models\AmbilLightConfigurationSettingsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\BaseSettingsModelProvider.cs" />
-    <Compile Include="Providers\SettingsModelProvider.cs" />
     <Compile Include="Services\ColorCalculationService.cs" />
     <Compile Include="Services\ScreenCaptureService.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
