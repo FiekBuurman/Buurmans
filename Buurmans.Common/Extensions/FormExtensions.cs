@@ -73,25 +73,16 @@ namespace Buurmans.Common.Extensions
 
 		public static void ToggleColorCheckBoxes(this Form form, bool setChecked)
 		{
-			foreach (Control control in form.Controls)
-			{
-				SetCheckColorCheckBox(control, setChecked);
-			}
+			SetColorCheckBoxesState(form, setChecked);
 		}
 
-		private static void SetCheckColorCheckBox(Control control, bool setChecked)
+		private static void SetColorCheckBoxesState(Control control, bool setChecked)
 		{
-			if (control is ColorCheckBox colorCheckBox)
-			{
+			foreach (Control nestedControl in control.Controls) 
+				SetColorCheckBoxesState(nestedControl, setChecked);
+
+            if (control is ColorCheckBox colorCheckBox)
 				colorCheckBox.Checked = setChecked;
-			}
-			else
-			{
-				foreach (Control nestedControl in control.Controls)
-				{
-					SetCheckColorCheckBox(nestedControl, setChecked);
-				}
-			}
 		}
     }
 }
