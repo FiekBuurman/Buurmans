@@ -2,6 +2,7 @@
 using System.Drawing;
 using Buurmans.AmbiLight.Form.Interfaces;
 using Buurmans.Common.Extensions;
+using Buurmans.Common.Views;
 
 namespace Buurmans.AmbiLight.Form.Views
 {

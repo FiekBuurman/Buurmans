@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using Buurmans.Common.Interfaces;
 
 namespace Buurmans.AmbiLight.Form.Interfaces
 {

@@ -1,4 +1,5 @@
 ﻿using Buurmans.AmbiLight.Core.Models;
+using Buurmans.Common.Interfaces;
 
 namespace Buurmans.AmbiLight.Form.Interfaces
 {
