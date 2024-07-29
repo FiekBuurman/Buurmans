@@ -29,6 +29,8 @@ namespace Buurmans.Common.Providers
 
             var serializedSettingsModel = jsonConverter.Serialize(settingsModel);
 			File.WriteAllText(_filePath, serializedSettingsModel);
+
+			_settingsModel = null;
 		}
 
 		private void EnsureFilePath()
