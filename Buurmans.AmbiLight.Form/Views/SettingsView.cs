@@ -5,6 +5,7 @@ using Buurmans.AmbiLight.Core.Models;
 using Buurmans.AmbiLight.Form.Interfaces;
 using Buurmans.Common.Controls;
 using Buurmans.Common.Extensions;
+using Buurmans.Common.Views;
 using Buurmans.Mqtt.Models;
 
 namespace Buurmans.AmbiLight.Form.Views
