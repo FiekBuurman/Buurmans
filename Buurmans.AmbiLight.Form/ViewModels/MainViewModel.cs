@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Buurmans.AmbiLight.Core.Interfaces;
 using Buurmans.AmbiLight.Core.Models;
 using Buurmans.AmbiLight.Form.Interfaces;
+using Buurmans.Common.Enums;
 using Buurmans.Common.Extensions;
 using Buurmans.Common.Interfaces;
 using Buurmans.Mqtt;
@@ -18,7 +19,8 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 		IAmbiLightConfigurationProvider settingsProvider, 
 		ISettingsView settingsView, 
 		IObserverManager observerManager,
-		IMqttEngine mqttEngine
+		IMqttEngine mqttEngine,
+		ILogger logger
 		) : IMainViewModel
 	{
 		private IMainView _mainView;
@@ -27,9 +29,18 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 		public void Init(IMainView mainView)
 		{
 			_mainView = mainView;
+
+			logger.SetLogLevels(LogLevelType.Error);
+
 			observerManager.Register<Exception>(_mainView.WriteException);
+			observerManager.Register<Exception>(WriteToErrorLog);
 			observerManager.Register<string>(_mainView.WriteMessage);
+			observerManager.Register<string>(WriteToLog);
         }
+
+		private void WriteToLog(string message) => logger.Info(message);
+
+		private void WriteToErrorLog(Exception exception) => logger.Error(exception);
 
 		public void StopButtonPressed()
 		{
