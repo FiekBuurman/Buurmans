@@ -45,13 +45,17 @@
     </Compile>
     <Compile Include="Converters\IJsonConverter.cs" />
     <Compile Include="Converters\JsonConverter.cs" />
+    <Compile Include="Enums\LogLevelType.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Extensions\ExceptionExtension.cs" />
     <Compile Include="Extensions\FormExtensions.cs" />
     <Compile Include="Extensions\RichTextBoxExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Helpers\TextFileLogHelper.cs" />
     <Compile Include="Interfaces\IBaseView.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\IObserverManager.cs" />
+    <Compile Include="Loggers\Logger.cs" />
     <Compile Include="Managers\ObserverManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\BaseConfigurationProvider.cs" />
