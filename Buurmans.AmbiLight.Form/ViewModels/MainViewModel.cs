@@ -71,7 +71,6 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 						{
                             observerManager.NotifyChange($"Skipped {currentColor.ToRgbString()}");
                         }
-
                     }
                     catch (Exception exception)
 					{
