@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Drawing;
 
 namespace Buurmans.Mqtt.Models
 {
@@ -12,5 +13,12 @@ namespace Buurmans.Mqtt.Models
 
 		[JsonProperty("b")]
 		public int Blue { get; set; }
+
+		public void UpdateColor(Color color) 
+		{ 
+			Red = color.R;
+			Green = color.G;
+			Blue = color.B;
+		}
 	}
 }

@@ -22,7 +22,7 @@ csharp_style_prefer_local_over_anonymous_function = true:suggestion
 csharp_style_prefer_index_operator = true:suggestion
 csharp_space_around_binary_operators = before_and_after
 vsspell_section_id = 6f72afed0a4745ea98a4e0d6b7435834
-vsspell_ignored_words_6f72afed0a4745ea98a4e0d6b7435834 = buurmans|mqtt|autofac
+vsspell_ignored_words_6f72afed0a4745ea98a4e0d6b7435834 = autofac|buurmans|mqtt|ambi
 
 [*.{cs,vb}]
 #### Naming styles ####

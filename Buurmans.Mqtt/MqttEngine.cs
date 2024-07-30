@@ -12,11 +12,14 @@ using MQTTnet.Client;
 namespace Buurmans.Mqtt
 {
 	internal class MqttEngine(
-		IObserverManager observerManager, 
-		IMqttConfigurationProvider mqttConfigurationProvider, 
+		IObserverManager observerManager,
 		IJsonConverter jsonConverter) : IMqttEngine
 	{
 		private readonly IMqttClient _mqttClient = new MqttFactory().CreateMqttClient();
+		private MqttConfigurationSettingsModel _mqttConfigurationSettingsModel;
+
+        public void InitSettings(MqttConfigurationSettingsModel mqttConfigurationSettingsModel) 
+			=> _mqttConfigurationSettingsModel = mqttConfigurationSettingsModel;
 
 		public Task Publish(MqttMessageModel mqttMessageModel)
 		{
@@ -24,17 +27,16 @@ namespace Buurmans.Mqtt
 			return Publish(mqttMessageModel.Topic, payload);
 		}
 
-        private async Task Connect()
+        public async Task Connect()
 		{
-			var mqttSettingsModel = mqttConfigurationProvider.GetSettings();
-			var result = await ConnectAsync(mqttSettingsModel.CreateMqttClientOptions());
-
+			ValidateSettings();
+            var result = await ConnectAsync(_mqttConfigurationSettingsModel.CreateMqttClientOptions());
 			observerManager.NotifyChange(result.FormatResult());
 		}
 
 		private async Task<MqttEngineResultModel> ConnectAsync(MqttClientOptions options)
 		{
-			if (_mqttClient.IsConnected)
+            if (_mqttClient.IsConnected)
 				return new MqttEngineResultModel(MqttClientConnectResultCode.Success, "Already Connected");
 
 			try
@@ -52,7 +54,7 @@ namespace Buurmans.Mqtt
 			}
 		}
 
-		private async Task Disconnect()
+		public async Task Disconnect()
 		{
 			var result = await DisconnectAsync();
 			observerManager.NotifyChange(result.FormatResult());
@@ -116,15 +118,16 @@ namespace Buurmans.Mqtt
 			};
 		}
 		
-		private void TestSettings()
+		public void TestSettings(MqttConfigurationSettingsModel mqttConfigurationSettingsModel)
 		{
-			var factory = new MqttFactory();
+			ValidateSettings();
+
+            var factory = new MqttFactory();
 			var client = factory.CreateMqttClient();
-            var mqttSettingsModel = mqttConfigurationProvider.GetSettings();
 
             try
 			{
-				var mqttOptions = mqttSettingsModel.CreateMqttClientOptions();
+				var mqttOptions = _mqttConfigurationSettingsModel.CreateMqttClientOptions();
 				var result = client.ConnectAsync(mqttOptions).Result;
 
 				observerManager.NotifyChange(result.ResultCode == MqttClientConnectResultCode.Success
@@ -147,6 +150,14 @@ namespace Buurmans.Mqtt
 			{
 				client.DisconnectAsync();
 			}
+		}
+
+		private void ValidateSettings()
+		{
+			if (_mqttConfigurationSettingsModel == null)
+				throw new Exception("MqttConfigurationSettingsModel = null, make sure to call InitSettings()");
+
+			// TODO add other validations settings, and maybe testing the settings.
 		}
 	}
 }

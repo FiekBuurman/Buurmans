@@ -17,7 +17,7 @@ namespace Buurmans.UnitTests
 			var actual = ExceptionExtension.FlattenException(null);
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
 		}
 
 		[Test]
@@ -32,8 +32,8 @@ namespace Buurmans.UnitTests
             var result = exception.FlattenException();
 
 			// Assert
-			Assert.IsTrue(result.Contains(expectedMessage), $"Expected to contain: \"{expectedMessage}\" in: \r{result}");
-			Assert.IsTrue(result.Contains(expectedSource), $"Expected to contain: \"{expectedSource}\" in: \r{result}");
+			Assert.That(result.Contains(expectedMessage), $"Expected to contain: \"{expectedMessage}\" in: \r{result}");
+			Assert.That(result.Contains(expectedSource), $"Expected to contain: \"{expectedSource}\" in: \r{result}");
 		}
     }
 }
