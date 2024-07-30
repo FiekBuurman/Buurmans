@@ -56,6 +56,8 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 					try
                     {
                         var screen = screenCaptureService.CaptureScreen();
+						_mainView.SetBitmap(screen);
+
                         currentColor = colorCalculationService.CalculateAverageColor(screen);
 
 						if (currentColor != previousColor)

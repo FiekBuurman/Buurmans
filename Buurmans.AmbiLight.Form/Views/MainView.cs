@@ -25,11 +25,16 @@ namespace Buurmans.AmbiLight.Form.Views
 		{
 			this.InvokeIfRequired(() => SetBackgroundColor(color));
 		}
+        public void SetBitmap(Bitmap bitmap)
+        {
+			this.InvokeIfRequired(() => OutputBitmapPictureBox.Image = bitmap);
+        }
 
-		private void SetBackgroundColor(Color color)
+        private void SetBackgroundColor(Color color)
 		{
-			CurrentColorToolStripStatusLabel.Text = color.ToString();
-			OutputPanel.BackColor = color;
+			CurrentColorToolStripStatusLabel.Text = color.ToRgbString();
+			OutputColorPanel.BackColor = color;
+			OutputColorLabel.Text = color.ToRgbString();
 		}
 
 		private void StartButton_Click(object sender, System.EventArgs e)
