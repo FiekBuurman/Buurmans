@@ -35,7 +35,7 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 			observerManager.Register<string>(_mainView.WriteMessage);
 			observerManager.Register<string>(WriteToLog);
 
-			logger.SetLogLevels(LogLevelType.NoLog);
+			logger.SetLogLevels(LogLevelType.All);
         }
 
 		private void WriteToLog(string message) => logger.Info(message);
@@ -54,6 +54,8 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 			_shouldKeepRunning = true;
 
 			var settingsModel = settingsProvider.GetSettings();
+			logger.SetLogLevels(settingsModel.LogLevel);
+
             var mqttMessage = CreateMqttMessage(settingsModel);
 			mqttEngine.InitSettings(settingsModel.MqttConfigurationSettingsModel);
 
