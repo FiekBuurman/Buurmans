@@ -15,27 +15,33 @@ public class Logger : ILogger
     private string _logFileFullPath = string.Empty;
     private LogLevelType _logLevelType = LogLevelType.All;
 
-    public void Info(string message, params object[] objects) => LogMessage(LogLevelType.Info, message, objects);
+	public void Info(string message) => LogMessage(LogLevelType.Info, message);
 
-    public void Warning(string message, params object[] objects) => LogMessage(LogLevelType.Warning, message, objects);
-
-    public void Error(string message, params object[] objects) => LogMessage(LogLevelType.Error, message, objects);
-
+    public void Warning(string message ) => LogMessage(LogLevelType.Warning, message);
+    
     public void Error(Exception exception) => LogMessage(LogLevelType.Error, exception.FlattenException());
 
-    public void SetLogLevels(LogLevelType logLevelType) => _logLevelType = logLevelType;
+    public void SetLogLevels(LogLevelType logLevelType)
+	{
+		_logLevelType = logLevelType;
+        LogMessage(LogLevelType.All, $"LogLevelType set to: {logLevelType}");
+	}
 
-    private void LogMessage(LogLevelType logLevelType, string message, params object[] objects)
+	private void LogMessage(LogLevelType logLevelType, string message )
     {
         if (!ShouldLog(logLevelType))
             return;
 
         EnsureLogFile();
-        Task.Run(() => TryAppendText(string.Format(message, objects)));
-    }
+
+		Task.Run(() => TryAppendText(message));
+	}
 
 	private bool ShouldLog(LogLevelType messageLogLevel)
 	{
+		if (messageLogLevel == LogLevelType.All)
+			return true;
+
 		return _logLevelType switch
 		{
 			LogLevelType.NoLog => false,
