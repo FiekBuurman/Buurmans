@@ -29,13 +29,13 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 		public void Init(IMainView mainView)
 		{
 			_mainView = mainView;
-
-			logger.SetLogLevels(LogLevelType.Error);
-
+			
 			observerManager.Register<Exception>(_mainView.WriteException);
 			observerManager.Register<Exception>(WriteToErrorLog);
 			observerManager.Register<string>(_mainView.WriteMessage);
 			observerManager.Register<string>(WriteToLog);
+
+			logger.SetLogLevels(LogLevelType.NoLog);
         }
 
 		private void WriteToLog(string message) => logger.Info(message);
@@ -66,12 +66,10 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 					Color currentColor;
 					try
                     {
-                        var screen = screenCaptureService.CaptureScreen();
-						_mainView.SetBitmap(screen);
-
-                        currentColor = colorCalculationService.CalculateAverageColor(screen);
-
-						if (currentColor != previousColor)
+                        var capturedScreen = screenCaptureService.CaptureScreen();
+                        currentColor = colorCalculationService.CalculateAverageColor(capturedScreen);
+						
+                        if (currentColor != previousColor)
 						{
 							observerManager.NotifyChange($"Captured {currentColor.ToRgbString()}");
 							UpdateMqttColorModel(mqttMessage, currentColor);
@@ -82,6 +80,8 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 						{
                             observerManager.NotifyChange($"Skipped {currentColor.ToRgbString()}");
                         }
+						
+						_mainView.SetBitmap(capturedScreen);
                     }
                     catch (Exception exception)
 					{
