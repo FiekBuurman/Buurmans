@@ -64,7 +64,7 @@
             // OutputColorPanel
             // 
             this.OutputColorPanel.Controls.Add(this.OutputColorLabel);
-            this.OutputColorPanel.Location = new System.Drawing.Point(3, 208);
+            this.OutputColorPanel.Location = new System.Drawing.Point(3, 236);
             this.OutputColorPanel.Name = "OutputColorPanel";
             this.OutputColorPanel.Size = new System.Drawing.Size(424, 45);
             this.OutputColorPanel.TabIndex = 3;
@@ -94,12 +94,12 @@
             // OutputRichTextBox
             // 
             this.OutputRichTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.OutputRichTextBox.Location = new System.Drawing.Point(3, 259);
+            this.OutputRichTextBox.Location = new System.Drawing.Point(3, 284);
             this.OutputRichTextBox.Margin = new System.Windows.Forms.Padding(10);
             this.OutputRichTextBox.Name = "OutputRichTextBox";
             this.OutputRichTextBox.ReadOnly = true;
             this.OutputRichTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.OutputRichTextBox.Size = new System.Drawing.Size(423, 167);
+            this.OutputRichTextBox.Size = new System.Drawing.Size(423, 147);
             this.OutputRichTextBox.TabIndex = 5;
             this.OutputRichTextBox.Text = "";
             this.OutputRichTextBox.TextChanged += new System.EventHandler(this.OutputRichTextBox_TextChanged);
@@ -107,9 +107,9 @@
             // OutputBitmapPictureBox
             // 
             this.OutputBitmapPictureBox.Location = new System.Drawing.Point(3, 57);
-            this.OutputBitmapPictureBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.OutputBitmapPictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.OutputBitmapPictureBox.Name = "OutputBitmapPictureBox";
-            this.OutputBitmapPictureBox.Size = new System.Drawing.Size(424, 146);
+            this.OutputBitmapPictureBox.Size = new System.Drawing.Size(424, 174);
             this.OutputBitmapPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.OutputBitmapPictureBox.TabIndex = 6;
             this.OutputBitmapPictureBox.TabStop = false;
