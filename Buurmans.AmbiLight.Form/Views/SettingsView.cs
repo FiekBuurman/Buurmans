@@ -143,5 +143,10 @@ namespace Buurmans.AmbiLight.Form.Views
 			var mqttSettingsModel = CreateMqttSettingsModelFromUserInput();
 			_settingsViewModel.TestMqttSettingsButtonPressed(mqttSettingsModel);
 		}
+
+        private void LogLevelTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			LogLevelDescriptionLabel.Text = ((LogLevelType)LogLevelTypeComboBox.SelectedItem).GetDescription();
+		}
     }
 }
