@@ -27,14 +27,19 @@ public class Logger : ILogger
         LogMessage(LogLevelType.All, $"LogLevelType set to: {logLevelType}");
 	}
 
-	private void LogMessage(LogLevelType logLevelType, string message )
-    {
+	private void LogMessage(LogLevelType logLevelType, string formattedMessage )
+	{
+		formattedMessage = $"{logLevelType}: {formattedMessage.AddTimePrefix()}";
+        
+        if (IsDebug()) 
+			Trace.WriteLine(formattedMessage);
+		
         if (!ShouldLog(logLevelType))
             return;
 
         EnsureLogFile();
 
-		Task.Run(() => TryAppendText(message));
+		Task.Run(() => TryAppendText(formattedMessage));
 	}
 
 	private bool ShouldLog(LogLevelType messageLogLevel)
@@ -64,7 +69,7 @@ public class Logger : ILogger
             try
 			{
 				using var streamWriter = new StreamWriter(_logFileFullPath, append: true);
-				streamWriter.WriteLine(message.AddTimePrefix());
+				streamWriter.WriteLine(message);
 				break;
 			}
             catch (IOException)
@@ -88,4 +93,13 @@ public class Logger : ILogger
             _logFileFullPath = TextFileLogHelper.GetOrCreateLogFileFullPath();
         }
     }
+
+	private static bool IsDebug()
+	{
+#if DEBUG
+		return true;
+#else
+            return false;
+#endif
+	}
 }
