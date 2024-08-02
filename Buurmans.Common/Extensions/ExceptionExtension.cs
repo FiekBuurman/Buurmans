@@ -8,6 +8,9 @@ public static class ExceptionExtension
 {
 	public static string FlattenException(this Exception exception)
 	{
+		if (exception == null)
+			return string.Empty;
+
 		var stringBuilder = new StringBuilder("\r");
 		stringBuilder.AppendLine("-------------------------------------------------------------------");
         var currentDate = DateTime.Now.ToLongDateString();
