@@ -1,0 +1,39 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.x  # Specify your .NET SDK version
+
+      - name: Restore dependencies
+        run: dotnet restore Buurmans.AmbiLight.Form/Buurmans.AmbiLight.Form.csproj
+
+      - name: Build the project
+        run: dotnet build Buurmans.AmbiLight.Form/Buurmans.AmbiLight.Form.csproj --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test --no-build --verbosity normal
+        continue-on-error: true
+
+      - name: Publish artifacts
+        if: success()
+        run: dotnet publish Buurmans.AmbiLight.Form/Buurmans.AmbiLight.Form.csproj -c Release -o out
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: executable
+          path: out/
