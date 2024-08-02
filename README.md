@@ -6,9 +6,7 @@ The Buurmans namespace is just a collection of various small projects and hopefu
 The first application is AmbiLight, next idea is to get Gas prices via scrapping a website and post the result over MQTT to homeassistant.
 
 
-![Ambient Light MQTT Diagram](https://raw.githubusercontent.com/FiekBuurman/Buurmans/main/Buurmans.Common/Resources/ambi-ligt-mqtt.png)
-## Ambi light to MQTT
-
+![Ambient Light MQTT Diagram](https://raw.githubusercontent.com/FiekBuurman/Buurmans/main/Buurmans.Common/Resources/ambi-light-2-mqtt-logo-small.png)
 ## What does it do?
 
 - Captures the avarage color of your screen.
