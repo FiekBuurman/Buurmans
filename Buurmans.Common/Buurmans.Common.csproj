@@ -84,6 +84,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Resources\ambi-light-2-mqtt-logo-large.png" />
+    <Content Include="Resources\ambi-light-2-mqtt-logo-small.png" />
     <Content Include="Resources\ambi-ligt-mqtt.ico" />
     <Content Include="Resources\ambi-ligt-mqtt.png" />
     <Content Include="Resources\light-bulb.png" />
