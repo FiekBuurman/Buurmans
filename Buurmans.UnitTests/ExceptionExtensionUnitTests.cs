@@ -25,15 +25,16 @@ namespace Buurmans.UnitTests
 		{
 			// Arrange
 			var exception = new Exception(ExceptionMessage) { Source = ExceptionSource };
-			var expectedMessage = ExceptionMessage;
-			var expectedSource = ExceptionSource;
 
-            // Act
+			// Act
             var result = exception.FlattenException();
 
 			// Assert
-			Assert.That(result.Contains(expectedMessage), $"Expected to contain: \"{expectedMessage}\" in: \r{result}");
-			Assert.That(result.Contains(expectedSource), $"Expected to contain: \"{expectedSource}\" in: \r{result}");
-		}
+            Assert.Multiple(() =>
+			{
+				Assert.That(result, Does.Contain(ExceptionMessage), $"Expected to contain: \"{ExceptionMessage}\" in: \r{result}");
+				Assert.That(result, Does.Contain(ExceptionSource), $"Expected to contain: \"{ExceptionSource}\" in: \r{result}");
+            });
+        }
     }
 }
