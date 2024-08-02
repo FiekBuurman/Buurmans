@@ -19,7 +19,7 @@ jobs:
           dotnet-version: 7.x  # Specify your .NET SDK version
 
       - name: Restore dependencies
-        run: dotnet restore Buurmans.AmbiLight.Form/Buurmans.AmbiLight.Form.csproj
+        run: dotnet restore # Restores all projects in the solution
 
       - name: Build the project
         run: dotnet build Buurmans.AmbiLight.Form/Buurmans.AmbiLight.Form.csproj --configuration Release --no-restore
