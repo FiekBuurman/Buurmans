@@ -82,8 +82,16 @@
       <Version>8.0.1</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <Content Include="Resources\ambi-ligt-mqtt.ico" />
+    <Content Include="Resources\ambi-ligt-mqtt.png" />
+    <Content Include="Resources\light-bulb.png" />
+    <Content Include="Resources\main-form-settings.jpg" />
+    <Content Include="Resources\settings-form.png" />
+    <Content Include="Resources\main-form.jpg" />
+    <Content Include="Resources\rgb.png" />
+    <Content Include="Resources\settings-form.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
