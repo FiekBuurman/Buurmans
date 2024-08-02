@@ -7,7 +7,7 @@
     <ProjectGuid>{97B7A83A-754C-4B88-9A62-37BA3BF25487}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Buurmans.AmbiLight.Form</RootNamespace>
-    <AssemblyName>Buurmans.AmbiLight.Form</AssemblyName>
+    <AssemblyName>AmbiLight2Mqtt</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ambi-ligt-mqtt.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=8.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -139,6 +142,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ambi-ligt-mqtt.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

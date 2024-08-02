@@ -129,7 +129,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Ambi Light MQTT";
+            this.Text = "Ambi Light 2 MQTT";
             this.Load += new System.EventHandler(this.MainView_Load);
             this.OutputColorPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.OutputBitmapPictureBox)).EndInit();
