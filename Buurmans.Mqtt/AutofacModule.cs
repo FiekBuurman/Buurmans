@@ -11,6 +11,5 @@ public class AutofacModule : Module
 
 		builder.RegisterType<MqttEngine>().AsImplementedInterfaces().SingleInstance();
 		builder.RegisterType<MqttConfigurationProvider>().AsImplementedInterfaces().SingleInstance();
-
 	}
 }

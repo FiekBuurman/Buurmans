@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Buurmans.AmbiLight.Core.Interfaces;
 using Buurmans.AmbiLight.Core.Models;
 using Buurmans.AmbiLight.Form.Interfaces;
+using Buurmans.Common.Enums;
 using Buurmans.Common.Extensions;
 using Buurmans.Common.Interfaces;
 using Buurmans.Mqtt;
@@ -18,7 +19,8 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 		IAmbiLightConfigurationProvider settingsProvider, 
 		ISettingsView settingsView, 
 		IObserverManager observerManager,
-		IMqttEngine mqttEngine
+		IMqttEngine mqttEngine,
+		ILogger logger
 		) : IMainViewModel
 	{
 		private IMainView _mainView;
@@ -27,9 +29,18 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 		public void Init(IMainView mainView)
 		{
 			_mainView = mainView;
+			
 			observerManager.Register<Exception>(_mainView.WriteException);
+			observerManager.Register<Exception>(WriteToErrorLog);
 			observerManager.Register<string>(_mainView.WriteMessage);
+			observerManager.Register<string>(WriteToLog);
+
+			logger.SetLogLevels(LogLevelType.All);
         }
+
+		private void WriteToLog(string message) => logger.Info(message);
+
+		private void WriteToErrorLog(Exception exception) => logger.Error(exception);
 
 		public void StopButtonPressed()
 		{
@@ -43,6 +54,8 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 			_shouldKeepRunning = true;
 
 			var settingsModel = settingsProvider.GetSettings();
+			logger.SetLogLevels(settingsModel.LogLevel);
+
             var mqttMessage = CreateMqttMessage(settingsModel);
 			mqttEngine.InitSettings(settingsModel.MqttConfigurationSettingsModel);
 
@@ -55,12 +68,10 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 					Color currentColor;
 					try
                     {
-                        var screen = screenCaptureService.CaptureScreen();
-						_mainView.SetBitmap(screen);
-
-                        currentColor = colorCalculationService.CalculateAverageColor(screen);
-
-						if (currentColor != previousColor)
+                        var capturedScreen = screenCaptureService.CaptureScreen();
+                        currentColor = colorCalculationService.CalculateAverageColor(capturedScreen);
+						
+                        if (currentColor != previousColor)
 						{
 							observerManager.NotifyChange($"Captured {currentColor.ToRgbString()}");
 							UpdateMqttColorModel(mqttMessage, currentColor);
@@ -71,6 +82,8 @@ namespace Buurmans.AmbiLight.Form.ViewModels
 						{
                             observerManager.NotifyChange($"Skipped {currentColor.ToRgbString()}");
                         }
+						
+						_mainView.SetBitmap(capturedScreen);
                     }
                     catch (Exception exception)
 					{

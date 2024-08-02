@@ -16,42 +16,41 @@ namespace Buurmans.AmbiLight.Form.Views
 			InitializeComponent();
 		}
 
-        private void MainView_Load(object sender, System.EventArgs e)
+        private void MainView_Load(object sender, EventArgs eventArgsventArgs)
         {
 			_mainViewModel.Init(this);
         }
 
 		public void UpdateBackGroundColor(Color color)
 		{
-			this.InvokeIfRequired(() => SetBackgroundColor(color));
+			this.InvokeIfRequired(() =>
+			{
+				OutputBitmapPictureBox.BackColor = color;
+                //OutputColorPanel.BackColor = color;
+				OutputColorLabel.Text = color.ToRgbString();
+            });
 		}
+
         public void SetBitmap(Bitmap bitmap)
         {
 			this.InvokeIfRequired(() => OutputBitmapPictureBox.Image = bitmap);
         }
 
-        private void SetBackgroundColor(Color color)
-		{
-			CurrentColorToolStripStatusLabel.Text = color.ToRgbString();
-			OutputColorPanel.BackColor = color;
-			OutputColorLabel.Text = color.ToRgbString();
-		}
-
-		private void StartButton_Click(object sender, System.EventArgs e)
+		private void StartButton_Click(object sender, EventArgs eventArgs)
 		{
 			this.DisableUserInput();
-			this.StopButton.Enabled = true;
+			StopButton.Enabled = true;
 			_mainViewModel.StartButtonPressed();
 		}
 
-        private void StopButton_Click(object sender, System.EventArgs e)
+        private void StopButton_Click(object sender, EventArgs eventArgs)
         {
 			this.EnableUserInput();
 			_mainViewModel.StopButtonPressed();
-			this.StopButton.Enabled = false;
+			StopButton.Enabled = false;
 		}
 
-        private void ShowSettingsButton_Click(object sender, System.EventArgs e)
+        private void ShowSettingsButton_Click(object sender, EventArgs eventArgs)
 		{
 			_mainViewModel.ShowSettingsButtonPressed();
 		}
@@ -72,7 +71,7 @@ namespace Buurmans.AmbiLight.Form.Views
 			});
 		}
 
-        private void OutputRichTextBox_TextChanged(object sender, System.EventArgs e)
+        private void OutputRichTextBox_TextChanged(object sender, EventArgs eventArgs)
         {
             if (OutputRichTextBox.Lines.Length > 99)
                 OutputRichTextBox.ResetText();

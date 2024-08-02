@@ -34,7 +34,6 @@
             this.DelayInMillisecondsNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.PixelSkipStepsNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.PixelSkipStepsLabel = new System.Windows.Forms.Label();
-            this.AllowedColorsLabel = new System.Windows.Forms.Label();
             this.ColorSettingsPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SelectAllColorsButton = new System.Windows.Forms.Button();
             this.SelectNoneColorsButton = new System.Windows.Forms.Button();
@@ -53,20 +52,32 @@
             this.TimeoutLabel = new System.Windows.Forms.Label();
             this.TimeoutNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.MqttSettingsPanel = new System.Windows.Forms.Panel();
-            this.MqttSettingsHeaderLabel = new System.Windows.Forms.Label();
             this.TestMqttButton = new System.Windows.Forms.Button();
+            this.MqttSettingsHeaderLabel = new System.Windows.Forms.Label();
+            this.ColorPanel = new System.Windows.Forms.Panel();
+            this.ColorSettingLabel = new System.Windows.Forms.Label();
+            this.CaptureSettingsPanel = new System.Windows.Forms.Panel();
+            this.CaptureSettingsLabel = new System.Windows.Forms.Label();
+            this.DebugSettingsLabel = new System.Windows.Forms.Label();
+            this.DebugSettingsPanel = new System.Windows.Forms.Panel();
+            this.LogLevelTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.LogLevelTypLabel = new System.Windows.Forms.Label();
+            this.LogLevelDescriptionLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DelayInMillisecondsNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PixelSkipStepsNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PortNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TimeoutNumericUpDown)).BeginInit();
             this.MqttSettingsPanel.SuspendLayout();
+            this.ColorPanel.SuspendLayout();
+            this.CaptureSettingsPanel.SuspendLayout();
+            this.DebugSettingsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // ResetSettingsButton
             // 
-            this.ResetSettingsButton.Location = new System.Drawing.Point(427, 449);
+            this.ResetSettingsButton.Location = new System.Drawing.Point(364, 406);
             this.ResetSettingsButton.Name = "ResetSettingsButton";
-            this.ResetSettingsButton.Size = new System.Drawing.Size(200, 50);
+            this.ResetSettingsButton.Size = new System.Drawing.Size(171, 50);
             this.ResetSettingsButton.TabIndex = 1;
             this.ResetSettingsButton.Text = "Reset";
             this.ResetSettingsButton.UseVisualStyleBackColor = true;
@@ -74,9 +85,9 @@
             // 
             // SaveSettingsButton
             // 
-            this.SaveSettingsButton.Location = new System.Drawing.Point(633, 449);
+            this.SaveSettingsButton.Location = new System.Drawing.Point(547, 406);
             this.SaveSettingsButton.Name = "SaveSettingsButton";
-            this.SaveSettingsButton.Size = new System.Drawing.Size(200, 50);
+            this.SaveSettingsButton.Size = new System.Drawing.Size(171, 50);
             this.SaveSettingsButton.TabIndex = 2;
             this.SaveSettingsButton.Text = "Save && Close";
             this.SaveSettingsButton.UseVisualStyleBackColor = true;
@@ -85,16 +96,16 @@
             // DelayInMillisecondsLabel
             // 
             this.DelayInMillisecondsLabel.AutoSize = true;
-            this.DelayInMillisecondsLabel.Location = new System.Drawing.Point(81, 35);
+            this.DelayInMillisecondsLabel.Location = new System.Drawing.Point(8, 44);
             this.DelayInMillisecondsLabel.Name = "DelayInMillisecondsLabel";
-            this.DelayInMillisecondsLabel.Size = new System.Drawing.Size(246, 13);
+            this.DelayInMillisecondsLabel.Size = new System.Drawing.Size(284, 15);
             this.DelayInMillisecondsLabel.TabIndex = 3;
             this.DelayInMillisecondsLabel.Text = "Delay in milliseonds between each screen capture:";
             this.DelayInMillisecondsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // DelayInMillisecondsNumericUpDown
             // 
-            this.DelayInMillisecondsNumericUpDown.Location = new System.Drawing.Point(333, 33);
+            this.DelayInMillisecondsNumericUpDown.Location = new System.Drawing.Point(260, 42);
             this.DelayInMillisecondsNumericUpDown.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -116,7 +127,7 @@
             // 
             // PixelSkipStepsNumericUpDown
             // 
-            this.PixelSkipStepsNumericUpDown.Location = new System.Drawing.Point(333, 59);
+            this.PixelSkipStepsNumericUpDown.Location = new System.Drawing.Point(260, 68);
             this.PixelSkipStepsNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
@@ -134,22 +145,12 @@
             // PixelSkipStepsLabel
             // 
             this.PixelSkipStepsLabel.AutoSize = true;
-            this.PixelSkipStepsLabel.Location = new System.Drawing.Point(110, 61);
+            this.PixelSkipStepsLabel.Location = new System.Drawing.Point(37, 70);
             this.PixelSkipStepsLabel.Name = "PixelSkipStepsLabel";
-            this.PixelSkipStepsLabel.Size = new System.Drawing.Size(217, 13);
+            this.PixelSkipStepsLabel.Size = new System.Drawing.Size(251, 15);
             this.PixelSkipStepsLabel.TabIndex = 5;
             this.PixelSkipStepsLabel.Text = "Amount of pixels to skip, more = less precise:";
             this.PixelSkipStepsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // AllowedColorsLabel
-            // 
-            this.AllowedColorsLabel.AutoSize = true;
-            this.AllowedColorsLabel.Location = new System.Drawing.Point(110, 114);
-            this.AllowedColorsLabel.Name = "AllowedColorsLabel";
-            this.AllowedColorsLabel.Size = new System.Drawing.Size(176, 13);
-            this.AllowedColorsLabel.TabIndex = 8;
-            this.AllowedColorsLabel.Text = "Select the colors to use for the light:";
-            this.AllowedColorsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ColorSettingsPanel
             // 
@@ -159,7 +160,7 @@
             this.ColorSettingsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.ColorSettingsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.ColorSettingsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.ColorSettingsPanel.Location = new System.Drawing.Point(46, 137);
+            this.ColorSettingsPanel.Location = new System.Drawing.Point(4, 44);
             this.ColorSettingsPanel.Name = "ColorSettingsPanel";
             this.ColorSettingsPanel.RowCount = 8;
             this.ColorSettingsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -175,7 +176,7 @@
             // 
             // SelectAllColorsButton
             // 
-            this.SelectAllColorsButton.Location = new System.Drawing.Point(46, 408);
+            this.SelectAllColorsButton.Location = new System.Drawing.Point(5, 314);
             this.SelectAllColorsButton.Name = "SelectAllColorsButton";
             this.SelectAllColorsButton.Size = new System.Drawing.Size(166, 22);
             this.SelectAllColorsButton.TabIndex = 11;
@@ -185,7 +186,7 @@
             // 
             // SelectNoneColorsButton
             // 
-            this.SelectNoneColorsButton.Location = new System.Drawing.Point(218, 408);
+            this.SelectNoneColorsButton.Location = new System.Drawing.Point(177, 314);
             this.SelectNoneColorsButton.Name = "SelectNoneColorsButton";
             this.SelectNoneColorsButton.Size = new System.Drawing.Size(166, 22);
             this.SelectNoneColorsButton.TabIndex = 12;
@@ -205,7 +206,7 @@
             this.BrokerLabel.AutoSize = true;
             this.BrokerLabel.Location = new System.Drawing.Point(30, 63);
             this.BrokerLabel.Name = "BrokerLabel";
-            this.BrokerLabel.Size = new System.Drawing.Size(41, 13);
+            this.BrokerLabel.Size = new System.Drawing.Size(46, 15);
             this.BrokerLabel.TabIndex = 15;
             this.BrokerLabel.Text = "Broker:";
             // 
@@ -214,7 +215,7 @@
             this.ClientIdLabel.AutoSize = true;
             this.ClientIdLabel.Location = new System.Drawing.Point(30, 141);
             this.ClientIdLabel.Name = "ClientIdLabel";
-            this.ClientIdLabel.Size = new System.Drawing.Size(42, 13);
+            this.ClientIdLabel.Size = new System.Drawing.Size(48, 15);
             this.ClientIdLabel.TabIndex = 17;
             this.ClientIdLabel.Text = "ClientId";
             // 
@@ -230,7 +231,7 @@
             this.UserNameLabel.AutoSize = true;
             this.UserNameLabel.Location = new System.Drawing.Point(30, 167);
             this.UserNameLabel.Name = "UserNameLabel";
-            this.UserNameLabel.Size = new System.Drawing.Size(60, 13);
+            this.UserNameLabel.Size = new System.Drawing.Size(70, 15);
             this.UserNameLabel.TabIndex = 19;
             this.UserNameLabel.Text = "UserName:";
             // 
@@ -246,7 +247,7 @@
             this.PasswordLabel.AutoSize = true;
             this.PasswordLabel.Location = new System.Drawing.Point(30, 193);
             this.PasswordLabel.Name = "PasswordLabel";
-            this.PasswordLabel.Size = new System.Drawing.Size(56, 13);
+            this.PasswordLabel.Size = new System.Drawing.Size(64, 15);
             this.PasswordLabel.TabIndex = 21;
             this.PasswordLabel.Text = "Password:";
             // 
@@ -262,7 +263,7 @@
             this.TopicLabel.AutoSize = true;
             this.TopicLabel.Location = new System.Drawing.Point(30, 219);
             this.TopicLabel.Name = "TopicLabel";
-            this.TopicLabel.Size = new System.Drawing.Size(37, 13);
+            this.TopicLabel.Size = new System.Drawing.Size(40, 15);
             this.TopicLabel.TabIndex = 23;
             this.TopicLabel.Text = "Topic:";
             // 
@@ -290,7 +291,7 @@
             this.PortLabel.AutoSize = true;
             this.PortLabel.Location = new System.Drawing.Point(30, 88);
             this.PortLabel.Name = "PortLabel";
-            this.PortLabel.Size = new System.Drawing.Size(80, 13);
+            this.PortLabel.Size = new System.Drawing.Size(91, 15);
             this.PortLabel.TabIndex = 26;
             this.PortLabel.Text = "Port: (0 = none)";
             // 
@@ -299,7 +300,7 @@
             this.TimeoutLabel.AutoSize = true;
             this.TimeoutLabel.Location = new System.Drawing.Point(30, 114);
             this.TimeoutLabel.Name = "TimeoutLabel";
-            this.TimeoutLabel.Size = new System.Drawing.Size(48, 13);
+            this.TimeoutLabel.Size = new System.Drawing.Size(55, 15);
             this.TimeoutLabel.TabIndex = 28;
             this.TimeoutLabel.Text = "Timeout:";
             // 
@@ -327,6 +328,7 @@
             // 
             // MqttSettingsPanel
             // 
+            this.MqttSettingsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.MqttSettingsPanel.Controls.Add(this.TestMqttButton);
             this.MqttSettingsPanel.Controls.Add(this.MqttSettingsHeaderLabel);
             this.MqttSettingsPanel.Controls.Add(this.BrokerTextBox);
@@ -343,21 +345,10 @@
             this.MqttSettingsPanel.Controls.Add(this.TopicTextBox);
             this.MqttSettingsPanel.Controls.Add(this.PasswordTextBox);
             this.MqttSettingsPanel.Controls.Add(this.PasswordLabel);
-            this.MqttSettingsPanel.Location = new System.Drawing.Point(462, 137);
+            this.MqttSettingsPanel.Location = new System.Drawing.Point(364, 115);
             this.MqttSettingsPanel.Name = "MqttSettingsPanel";
-            this.MqttSettingsPanel.Size = new System.Drawing.Size(338, 275);
+            this.MqttSettingsPanel.Size = new System.Drawing.Size(354, 275);
             this.MqttSettingsPanel.TabIndex = 29;
-            // 
-            // MqttSettingsHeaderLabel
-            // 
-            this.MqttSettingsHeaderLabel.AutoSize = true;
-            this.MqttSettingsHeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MqttSettingsHeaderLabel.Location = new System.Drawing.Point(87, 5);
-            this.MqttSettingsHeaderLabel.Name = "MqttSettingsHeaderLabel";
-            this.MqttSettingsHeaderLabel.Size = new System.Drawing.Size(176, 25);
-            this.MqttSettingsHeaderLabel.TabIndex = 29;
-            this.MqttSettingsHeaderLabel.Text = "MQTT Settings:";
-            this.MqttSettingsHeaderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TestMqttButton
             // 
@@ -369,20 +360,124 @@
             this.TestMqttButton.UseVisualStyleBackColor = true;
             this.TestMqttButton.Click += new System.EventHandler(this.TestMqttButton_Click);
             // 
+            // MqttSettingsHeaderLabel
+            // 
+            this.MqttSettingsHeaderLabel.AutoSize = true;
+            this.MqttSettingsHeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MqttSettingsHeaderLabel.Location = new System.Drawing.Point(87, 5);
+            this.MqttSettingsHeaderLabel.Name = "MqttSettingsHeaderLabel";
+            this.MqttSettingsHeaderLabel.Size = new System.Drawing.Size(219, 31);
+            this.MqttSettingsHeaderLabel.TabIndex = 29;
+            this.MqttSettingsHeaderLabel.Text = "MQTT Settings:";
+            this.MqttSettingsHeaderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ColorPanel
+            // 
+            this.ColorPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ColorPanel.Controls.Add(this.ColorSettingLabel);
+            this.ColorPanel.Controls.Add(this.ColorSettingsPanel);
+            this.ColorPanel.Controls.Add(this.SelectAllColorsButton);
+            this.ColorPanel.Controls.Add(this.SelectNoneColorsButton);
+            this.ColorPanel.Location = new System.Drawing.Point(8, 115);
+            this.ColorPanel.Name = "ColorPanel";
+            this.ColorPanel.Size = new System.Drawing.Size(350, 341);
+            this.ColorPanel.TabIndex = 30;
+            // 
+            // ColorSettingLabel
+            // 
+            this.ColorSettingLabel.AutoSize = true;
+            this.ColorSettingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ColorSettingLabel.Location = new System.Drawing.Point(75, 9);
+            this.ColorSettingLabel.Name = "ColorSettingLabel";
+            this.ColorSettingLabel.Size = new System.Drawing.Size(218, 31);
+            this.ColorSettingLabel.TabIndex = 31;
+            this.ColorSettingLabel.Text = "Allowed Colors:";
+            this.ColorSettingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // CaptureSettingsPanel
+            // 
+            this.CaptureSettingsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CaptureSettingsPanel.Controls.Add(this.CaptureSettingsLabel);
+            this.CaptureSettingsPanel.Controls.Add(this.PixelSkipStepsNumericUpDown);
+            this.CaptureSettingsPanel.Controls.Add(this.DelayInMillisecondsLabel);
+            this.CaptureSettingsPanel.Controls.Add(this.DelayInMillisecondsNumericUpDown);
+            this.CaptureSettingsPanel.Controls.Add(this.PixelSkipStepsLabel);
+            this.CaptureSettingsPanel.Location = new System.Drawing.Point(8, 9);
+            this.CaptureSettingsPanel.Name = "CaptureSettingsPanel";
+            this.CaptureSettingsPanel.Size = new System.Drawing.Size(350, 100);
+            this.CaptureSettingsPanel.TabIndex = 31;
+            // 
+            // CaptureSettingsLabel
+            // 
+            this.CaptureSettingsLabel.AutoSize = true;
+            this.CaptureSettingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CaptureSettingsLabel.Location = new System.Drawing.Point(81, 5);
+            this.CaptureSettingsLabel.Name = "CaptureSettingsLabel";
+            this.CaptureSettingsLabel.Size = new System.Drawing.Size(242, 31);
+            this.CaptureSettingsLabel.TabIndex = 31;
+            this.CaptureSettingsLabel.Text = "Capture Settings:";
+            this.CaptureSettingsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // DebugSettingsLabel
+            // 
+            this.DebugSettingsLabel.AutoSize = true;
+            this.DebugSettingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DebugSettingsLabel.Location = new System.Drawing.Point(81, 5);
+            this.DebugSettingsLabel.Name = "DebugSettingsLabel";
+            this.DebugSettingsLabel.Size = new System.Drawing.Size(223, 31);
+            this.DebugSettingsLabel.TabIndex = 31;
+            this.DebugSettingsLabel.Text = "Debug Settings:";
+            this.DebugSettingsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // DebugSettingsPanel
+            // 
+            this.DebugSettingsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.DebugSettingsPanel.Controls.Add(this.LogLevelDescriptionLabel);
+            this.DebugSettingsPanel.Controls.Add(this.LogLevelTypeComboBox);
+            this.DebugSettingsPanel.Controls.Add(this.DebugSettingsLabel);
+            this.DebugSettingsPanel.Controls.Add(this.LogLevelTypLabel);
+            this.DebugSettingsPanel.Location = new System.Drawing.Point(364, 9);
+            this.DebugSettingsPanel.Name = "DebugSettingsPanel";
+            this.DebugSettingsPanel.Size = new System.Drawing.Size(350, 100);
+            this.DebugSettingsPanel.TabIndex = 32;
+            // 
+            // LogLevelTypeComboBox
+            // 
+            this.LogLevelTypeComboBox.FormattingEnabled = true;
+            this.LogLevelTypeComboBox.Location = new System.Drawing.Point(200, 41);
+            this.LogLevelTypeComboBox.Name = "LogLevelTypeComboBox";
+            this.LogLevelTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.LogLevelTypeComboBox.TabIndex = 32;
+            this.LogLevelTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.LogLevelTypeComboBox_SelectedIndexChanged);
+            // 
+            // LogLevelTypLabel
+            // 
+            this.LogLevelTypLabel.AutoSize = true;
+            this.LogLevelTypLabel.Location = new System.Drawing.Point(118, 44);
+            this.LogLevelTypLabel.Name = "LogLevelTypLabel";
+            this.LogLevelTypLabel.Size = new System.Drawing.Size(59, 15);
+            this.LogLevelTypLabel.TabIndex = 3;
+            this.LogLevelTypLabel.Text = "Log level:";
+            this.LogLevelTypLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // LogLevelDescriptionLabel
+            // 
+            this.LogLevelDescriptionLabel.Location = new System.Drawing.Point(3, 71);
+            this.LogLevelDescriptionLabel.Name = "LogLevelDescriptionLabel";
+            this.LogLevelDescriptionLabel.Size = new System.Drawing.Size(346, 25);
+            this.LogLevelDescriptionLabel.TabIndex = 33;
+            this.LogLevelDescriptionLabel.Text = "Currently Logging: Info, warnings && Errors";
+            this.LogLevelDescriptionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // SettingsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 511);
+            this.ClientSize = new System.Drawing.Size(725, 465);
+            this.Controls.Add(this.DebugSettingsPanel);
+            this.Controls.Add(this.CaptureSettingsPanel);
+            this.Controls.Add(this.ColorPanel);
             this.Controls.Add(this.MqttSettingsPanel);
-            this.Controls.Add(this.SelectNoneColorsButton);
-            this.Controls.Add(this.SelectAllColorsButton);
-            this.Controls.Add(this.ColorSettingsPanel);
-            this.Controls.Add(this.AllowedColorsLabel);
-            this.Controls.Add(this.PixelSkipStepsNumericUpDown);
-            this.Controls.Add(this.PixelSkipStepsLabel);
-            this.Controls.Add(this.DelayInMillisecondsNumericUpDown);
-            this.Controls.Add(this.DelayInMillisecondsLabel);
             this.Controls.Add(this.SaveSettingsButton);
             this.Controls.Add(this.ResetSettingsButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -396,8 +491,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.TimeoutNumericUpDown)).EndInit();
             this.MqttSettingsPanel.ResumeLayout(false);
             this.MqttSettingsPanel.PerformLayout();
+            this.ColorPanel.ResumeLayout(false);
+            this.ColorPanel.PerformLayout();
+            this.CaptureSettingsPanel.ResumeLayout(false);
+            this.CaptureSettingsPanel.PerformLayout();
+            this.DebugSettingsPanel.ResumeLayout(false);
+            this.DebugSettingsPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -409,7 +509,6 @@
         private System.Windows.Forms.NumericUpDown DelayInMillisecondsNumericUpDown;
         private System.Windows.Forms.NumericUpDown PixelSkipStepsNumericUpDown;
         private System.Windows.Forms.Label PixelSkipStepsLabel;
-        private System.Windows.Forms.Label AllowedColorsLabel;
         private System.Windows.Forms.TableLayoutPanel ColorSettingsPanel;
         private System.Windows.Forms.Button SelectAllColorsButton;
         private System.Windows.Forms.Button SelectNoneColorsButton;
@@ -430,5 +529,14 @@
         private System.Windows.Forms.Panel MqttSettingsPanel;
         private System.Windows.Forms.Label MqttSettingsHeaderLabel;
         private System.Windows.Forms.Button TestMqttButton;
+        private System.Windows.Forms.Panel ColorPanel;
+        private System.Windows.Forms.Label ColorSettingLabel;
+        private System.Windows.Forms.Panel CaptureSettingsPanel;
+        private System.Windows.Forms.Label CaptureSettingsLabel;
+        private System.Windows.Forms.Label DebugSettingsLabel;
+        private System.Windows.Forms.Panel DebugSettingsPanel;
+        private System.Windows.Forms.Label LogLevelTypLabel;
+        private System.Windows.Forms.ComboBox LogLevelTypeComboBox;
+        private System.Windows.Forms.Label LogLevelDescriptionLabel;
     }
 }

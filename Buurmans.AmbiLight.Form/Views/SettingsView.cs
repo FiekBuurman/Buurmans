@@ -4,6 +4,7 @@ using System.Linq;
 using Buurmans.AmbiLight.Core.Models;
 using Buurmans.AmbiLight.Form.Interfaces;
 using Buurmans.Common.Controls;
+using Buurmans.Common.Enums;
 using Buurmans.Common.Extensions;
 using Buurmans.Common.Views;
 using Buurmans.Mqtt.Models;
@@ -23,7 +24,16 @@ namespace Buurmans.AmbiLight.Form.Views
 		private void SettingsView_Load(object sender, EventArgs e)
 		{
 			_settingsViewModel.Init(this);
+			CreateLogLevelTypeComboBoxItems();
 			_settingsViewModel.LoadSettings();
+		}
+
+		private void CreateLogLevelTypeComboBoxItems()
+		{
+			foreach (var logLevel in Enum.GetValues(typeof(LogLevelType)))
+			{
+				LogLevelTypeComboBox.Items.Add(logLevel);
+			}
 		}
 
 		public void LoadSettings(AmbiLightConfigurationSettingsModel settingsModel) => SetUserInputFromSettingsModel(settingsModel);
@@ -42,6 +52,7 @@ namespace Buurmans.AmbiLight.Form.Views
             {
 				PixelSkipSteps = (int)PixelSkipStepsNumericUpDown.Value,
 				DelayInMilliseconds = (int)DelayInMillisecondsNumericUpDown.Value,
+				LogLevel = (LogLevelType)LogLevelTypeComboBox.SelectedItem,
 				ColorSettingModels = GetColorSettingsModels(),
 				MqttConfigurationSettingsModel = CreateMqttSettingsModelFromUserInput()
 			};
@@ -65,6 +76,7 @@ namespace Buurmans.AmbiLight.Form.Views
 		{
 			PixelSkipStepsNumericUpDown.Value = settingsModel.PixelSkipSteps;
 			DelayInMillisecondsNumericUpDown.Value = settingsModel.DelayInMilliseconds;
+			LogLevelTypeComboBox.SelectedItem = settingsModel.LogLevel;
 			CreateColorSettingCheckBoxPanel(settingsModel.ColorSettingModels);
 			SetUserInputFromMqttSettingsModel(settingsModel.MqttConfigurationSettingsModel);
 		}
@@ -130,6 +142,11 @@ namespace Buurmans.AmbiLight.Form.Views
         {
 			var mqttSettingsModel = CreateMqttSettingsModelFromUserInput();
 			_settingsViewModel.TestMqttSettingsButtonPressed(mqttSettingsModel);
+		}
+
+        private void LogLevelTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			LogLevelDescriptionLabel.Text = ((LogLevelType)LogLevelTypeComboBox.SelectedItem).GetDescription();
 		}
     }
 }
