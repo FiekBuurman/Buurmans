@@ -21,9 +21,10 @@ internal class AmbiLightConfigurationProvider(IJsonConverter jsonConverter)
 	private AmbiLightConfigurationSettingsModel CreateDefaultSettings()
 	{
 		var settingsModel = new AmbiLightConfigurationSettingsModel
-		{
+        {
 			PixelSkipSteps = 10,
 			DelayInMilliseconds = 1000,
+			UseAccurateColors = false,
 			ColorSettingModels = CreateColorSettingModels(),
 			MqttConfigurationSettingsModel = CreateDefaultMqttSettings()
 		};
