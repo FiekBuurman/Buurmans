@@ -52,6 +52,7 @@ namespace Buurmans.AmbiLight.Form.Views
             {
 				PixelSkipSteps = (int)PixelSkipStepsNumericUpDown.Value,
 				DelayInMilliseconds = (int)DelayInMillisecondsNumericUpDown.Value,
+				UseAccurateColors = useAccurateColorsCheckBox.Checked,
 				LogLevel = (LogLevelType)LogLevelTypeComboBox.SelectedItem,
 				ColorSettingModels = GetColorSettingsModels(),
 				MqttConfigurationSettingsModel = CreateMqttSettingsModelFromUserInput()
@@ -77,6 +78,7 @@ namespace Buurmans.AmbiLight.Form.Views
 			PixelSkipStepsNumericUpDown.Value = settingsModel.PixelSkipSteps;
 			DelayInMillisecondsNumericUpDown.Value = settingsModel.DelayInMilliseconds;
 			LogLevelTypeComboBox.SelectedItem = settingsModel.LogLevel;
+			useAccurateColorsCheckBox.Checked = settingsModel.UseAccurateColors;
 			CreateColorSettingCheckBoxPanel(settingsModel.ColorSettingModels);
 			SetUserInputFromMqttSettingsModel(settingsModel.MqttConfigurationSettingsModel);
 		}
