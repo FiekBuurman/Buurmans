@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using Buurmans.AmbiLight.Core.Helpers;
 using Buurmans.AmbiLight.Core.Interfaces;
 
 namespace Buurmans.AmbiLight.Core.Services;
@@ -11,11 +11,20 @@ internal class ColorCalculationService(
 	IAmbiLightConfigurationProvider settingsProvider
 	) : IColorCalculationService
 {
+	private List<Color> _accurateColors;
+    
 	public Color CalculateAverageColor(Bitmap bitmap)
 	{
 		var settingsModel = settingsProvider.GetSettings();
-		var averageColor = GetAverageColor(bitmap, settingsModel.PixelSkipSteps);
-		var allowedColors = settingsModel.ColorSettingModels.Where(x => x.Allowed).Select(o => o.Color).ToList();
+        var averageColor = GetAverageColor(bitmap, settingsModel.PixelSkipSteps);
+
+		if (settingsModel.UseAccurateColors)
+		{
+			_accurateColors ??= ColorHelper.CreateAccurateColorList();
+            return FindClosestColor(_accurateColors, averageColor);
+		}
+
+        var allowedColors = settingsModel.ColorSettingModels.Where(x => x.Allowed).Select(o => o.Color).ToList();
 		return FindClosestColor(allowedColors, averageColor);
 	}
 
@@ -53,7 +62,7 @@ internal class ColorCalculationService(
 		return Color.FromArgb((int)averageRed, (int)averageGreen, (int)averageBlue);
 	}
 
-	private static Color FindClosestColor(List<Color> colorList, Color targetColor)
+    private static Color FindClosestColor(List<Color> colorList, Color targetColor)
 	{
 		if (colorList == null || !colorList.Any())
 			return targetColor;
@@ -63,7 +72,7 @@ internal class ColorCalculationService(
 
 		foreach (var color in colorList)
 		{
-			var distance = CalculateColorDistance(targetColor, color);
+			var distance = ColorHelper.CalculateColorDistance(targetColor, color);
 			if (distance < minDistance)
 			{
 				minDistance = distance;
@@ -72,14 +81,5 @@ internal class ColorCalculationService(
 		}
 
 		return closestColor;
-	}
-
-	private static double CalculateColorDistance(Color color1, Color color2)
-	{
-		var deltaR = color1.R - color2.R;
-		var deltaG = color1.G - color2.G;
-		var deltaB = color1.B - color2.B;
-
-		return Math.Sqrt(deltaR * deltaR + deltaG * deltaG + deltaB * deltaB);
 	}
 }

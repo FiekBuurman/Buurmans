@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutofacModule.cs" />
+    <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="Providers\AmbiLightConfigurationProvider.cs" />
     <Compile Include="Interfaces\IAmbiLightConfigurationProvider.cs" />
     <Compile Include="Interfaces\IColorCalculationService.cs" />
