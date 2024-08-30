@@ -21,12 +21,9 @@ internal static class TextFileLogHelper
 		string returnName;
 		try
 		{
-			if (string.IsNullOrEmpty(Environment.UserName))
-			{
-				returnName = $"({Environment.MachineName})";
-			}
-
-			returnName = $"({Environment.UserName})";
+			returnName = string.IsNullOrEmpty(Environment.UserName) 
+				? $"({Environment.MachineName})" 
+				: $"({Environment.UserName})";
 		}
 		catch
 		{
