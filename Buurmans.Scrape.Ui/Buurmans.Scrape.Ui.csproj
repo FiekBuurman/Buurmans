@@ -74,6 +74,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Buurmans.Mqtt\Buurmans.Mqtt.csproj">
+      <Project>{85210519-DA25-46C3-8F78-8F94FE7D1035}</Project>
+      <Name>Buurmans.Mqtt</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Buurmans.Scrape.Core\Buurmans.Scrape.Core.csproj">
       <Project>{6f6e3099-a4a4-402e-a78b-8c60bbbe5de6}</Project>
       <Name>Buurmans.Scrape.Core</Name>

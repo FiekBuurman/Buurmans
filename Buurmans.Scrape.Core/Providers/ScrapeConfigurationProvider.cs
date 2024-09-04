@@ -61,8 +61,8 @@ internal class ScrapeConfigurationProvider(IJsonConverter jsonConverter)
 			},
 			new ScrapeRequestModel
 			{
-				Name = "dOET IE UT?",
-				Uri = "https://www.brandstof-zoeker.nl/station/argos-delft-2710/",
+				Name = "Makro Delft Price",
+				Uri = "https://www.brandstof-zoeker.nl/station/makro-delft-2861/",
 				CssSelector = "#page > div:nth-child(3) > div > div:nth-child(2) > dl > dt:nth-child(3) > span"
 			}
 		];
